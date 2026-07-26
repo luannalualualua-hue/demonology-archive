@@ -1,0 +1,174 @@
+<section class="hero">
+  <div class="hero__background" aria-hidden="true"></div>
+  <div class="hero__noise" aria-hidden="true"></div>
+
+  <div class="container hero__content">
+    <div class="hero__meta">
+      <span>ЦИФРОВОЙ АРХИВ</span>
+      <span>КОЛЛЕКЦИЯ 001–024</span>
+    </div>
+
+    <div class="hero__main">
+      <p class="hero__eyebrow">
+        Образовательная энциклопедия
+      </p>
+
+      <h1>
+        Образы страха
+        <em>в культурах мира</em>
+      </h1>
+
+      <div class="hero__description">
+        <p>
+          Исследование мифологических существ как отражений
+          человеческих страхов, культурной памяти и коллективного
+          воображения.
+        </p>
+
+        <a class="button button--primary" routerLink="/encyclopedia">
+          <span>Открыть архив</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__footer">
+      <span>Архивные материалы</span>
+      <span>Мифология / Фольклор / Визуальная культура</span>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto section">
+  <div class="container manifesto__grid">
+    <div class="section-index">
+      <span>РАЗДЕЛ 01</span>
+      <span>ОБ ИССЛЕДОВАНИИ</span>
+    </div>
+
+    <div class="manifesto__content">
+      <p class="manifesto__lead">
+        Демоны и чудовища возникают там, где человек пытается
+        придать форму неизвестному.
+      </p>
+
+      <div class="manifesto__columns">
+        <p>
+          В разных частях мира существуют похожие легенды:
+          духи воды, предвестники смерти, ночные охотники и существа,
+          способные принимать человеческий облик.
+        </p>
+
+        <p>
+          Эта энциклопедия рассматривает их не только как персонажей
+          фольклора, но и как визуальные модели страха, которые могут
+          стать источником идей для художников, сценаристов и
+          гейм-дизайнеров.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="featured section">
+  <div class="container">
+    <header class="section-header">
+      <div>
+        <span class="section-kicker">ИЗБРАННЫЕ МАТЕРИАЛЫ</span>
+        <h2>Из архива</h2>
+      </div>
+
+      <a class="text-link" routerLink="/encyclopedia">
+        Смотреть все материалы
+        <span aria-hidden="true">↗</span>
+      </a>
+    </header>
+
+    <div class="creature-grid">
+      @for (creature of featuredCreatures; track creature.slug) {
+        <a
+          class="creature-card"
+          [routerLink]="['/encyclopedia', creature.slug]"
+        >
+          <div class="creature-card__image">
+            <img
+              [src]="creature.image"
+              [alt]="creature.name"
+              loading="lazy"
+            />
+
+            <span class="creature-card__archive">
+              АРХИВ № {{ creature.archiveNumber }}
+            </span>
+          </div>
+
+          <div class="creature-card__content">
+            <div>
+              <span class="creature-card__culture">
+                {{ creature.culture }}
+              </span>
+
+              <h3>{{ creature.name }}</h3>
+            </div>
+
+            <span class="creature-card__arrow" aria-hidden="true">
+              ↗
+            </span>
+          </div>
+
+          <div class="creature-card__fear">
+            <span>ОБРАЗ СТРАХА</span>
+            <strong>{{ creature.fear[0] }}</strong>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="fears section">
+  <div class="container fears__grid">
+    <header class="fears__header">
+      <span class="section-kicker">КЛАССИФИКАЦИЯ</span>
+
+      <h2>
+        У каждого чудовища есть причина существовать
+      </h2>
+
+      <p>
+        Архив позволяет изучать существ не только по культуре
+        происхождения, но и по страху, который они воплощают.
+      </p>
+    </header>
+
+    <div class="fear-list">
+      @for (fear of fearCategories; track fear.number) {
+        <article class="fear-item">
+          <span class="fear-item__number">{{ fear.number }}</span>
+
+          <div>
+            <h3>{{ fear.name }}</h3>
+            <p>{{ fear.description }}</p>
+          </div>
+
+          <span class="fear-item__symbol" aria-hidden="true">+</span>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="quote-section section">
+  <div class="container quote-section__inner">
+    <span class="section-kicker">ПОЛЕВАЯ ЗАПИСЬ / 00</span>
+
+    <blockquote>
+      «Чудовище начинается там, где знакомая форма
+      перестаёт вести себя ожидаемо».
+    </blockquote>
+
+    <a class="button button--outline" routerLink="/about">
+      Методология проекта
+    </a>
+  </div>
+</section>

@@ -1,0 +1,201 @@
+<section class="gallery-hero">
+  <div class="container gallery-hero__inner">
+    <div class="gallery-hero__meta">
+      <span>АРХИВ / РАЗДЕЛ 03</span>
+      <span>{{ images.length }} ИЗОБРАЖЕНИЙ</span>
+    </div>
+
+    <div class="gallery-hero__content">
+      <div>
+        <p class="gallery-hero__eyebrow">
+          Визуальный архив
+        </p>
+
+        <h1>Галерея</h1>
+      </div>
+
+      <p>
+        Коллекция образов, пейзажей и визуальных мотивов,
+        связанных с мифологическими существами и культурными
+        представлениями о страхе.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section">
+  <div class="container">
+    <div class="gallery-toolbar">
+      <div class="filter-section">
+        <span class="filter-section__label">
+          КАТЕГОРИЯ
+        </span>
+
+        <div class="filter-buttons">
+          <button
+            type="button"
+            [class.filter-button--active]="
+              selectedCategory() === ''
+            "
+            (click)="selectCategory('')"
+          >
+            Все
+          </button>
+
+          @for (category of categories; track category) {
+            <button
+              type="button"
+              [class.filter-button--active]="
+                selectedCategory() === category
+              "
+              (click)="selectCategory(category)"
+            >
+              {{ category }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="culture-filter">
+        <label for="gallery-culture">
+          Культура
+        </label>
+
+        <select
+          id="gallery-culture"
+          [value]="selectedCulture()"
+          (change)="
+            selectCulture($any($event.target).value)
+          "
+        >
+          <option value="">Все культуры</option>
+
+          @for (culture of cultures; track culture) {
+            <option [value]="culture">
+              {{ culture }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <div class="gallery-toolbar__result">
+        <span>ПОКАЗАНО</span>
+        <strong>{{ filteredImages().length }}</strong>
+      </div>
+    </div>
+
+    @if (hasFilters()) {
+      <div class="active-filter-row">
+        <span>
+          Активная выборка:
+        </span>
+
+        @if (selectedCategory()) {
+          <button
+            type="button"
+            (click)="selectCategory('')"
+          >
+            {{ selectedCategory() }}
+            <span aria-hidden="true">×</span>
+          </button>
+        }
+
+        @if (selectedCulture()) {
+          <button
+            type="button"
+            (click)="selectCulture('')"
+          >
+            {{ selectedCulture() }}
+            <span aria-hidden="true">×</span>
+          </button>
+        }
+
+        <button
+          class="active-filter-row__reset"
+          type="button"
+          (click)="resetFilters()"
+        >
+          Сбросить всё
+        </button>
+      </div>
+    }
+
+    @if (filteredImages().length > 0) {
+      <div class="gallery-grid">
+        @for (
+          image of filteredImages();
+          track image.id;
+          let index = $index
+        ) {
+          <button
+            class="gallery-item"
+            [class.gallery-item--wide]="
+              index % 7 === 0
+            "
+            [class.gallery-item--tall]="
+              index % 5 === 2
+            "
+            type="button"
+            (click)="openLightbox(image)"
+          >
+            <div class="gallery-item__image">
+              <img
+                [src]="image.thumbnail"
+                [alt]="image.title"
+                loading="lazy"
+              />
+
+              <span class="gallery-item__open">
+                Открыть
+                <span aria-hidden="true">↗</span>
+              </span>
+            </div>
+
+            <div class="gallery-item__content">
+              <div>
+                <span class="gallery-item__archive">
+                  {{ image.archiveNumber }}
+                </span>
+
+                <h2>{{ image.title }}</h2>
+
+                <p>{{ image.creatureName }}</p>
+              </div>
+
+              <span class="gallery-item__category">
+                {{ image.category }}
+              </span>
+            </div>
+          </button>
+        }
+      </div>
+    } @else {
+      <div class="gallery-empty">
+        <span>АРХИВ / 404</span>
+
+        <h2>Изображения не найдены</h2>
+
+        <p>
+          Для выбранного сочетания категорий пока нет
+          архивных материалов.
+        </p>
+
+        <button
+          type="button"
+          (click)="resetFilters()"
+        >
+          Показать всю галерею
+        </button>
+      </div>
+    }
+  </div>
+</section>
+
+@if (lightboxOpen()) {
+  <app-gallery-lightbox
+    [images]="filteredImages()"
+    [selectedIndex]="selectedImageIndex()"
+    (closed)="closeLightbox()"
+    (indexChanged)="changeLightboxIndex($event)"
+  />
+}

@@ -1,0 +1,305 @@
+<section class="about-hero">
+  <div class="about-hero__background" aria-hidden="true"></div>
+  <div class="about-hero__noise" aria-hidden="true"></div>
+
+  <div class="container about-hero__inner">
+    <div class="about-hero__meta">
+      <span>АРХИВ / РАЗДЕЛ 06</span>
+      <span>ОБРАЗОВАТЕЛЬНЫЙ ПРОЕКТ</span>
+    </div>
+
+    <div class="about-hero__content">
+      <div>
+        <p class="about-hero__eyebrow">
+          О цифровом архиве
+        </p>
+
+        <h1>О проекте</h1>
+      </div>
+
+      <p>
+        «Демонология» — некоммерческий образовательный сайт,
+        посвящённый образам страха в мифологии и фольклоре
+        народов мира.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="project-intro section">
+  <div class="container project-intro__grid">
+    <div class="section-index">
+      <span>01</span>
+      <span>КОНЦЕПЦИЯ</span>
+    </div>
+
+    <div class="project-intro__content">
+      <p class="project-intro__lead">
+        Чудовища разных культур часто выглядят по-разному,
+        но рождаются из похожих человеческих страхов.
+      </p>
+
+      <div class="project-intro__columns">
+        <p>
+          Проект исследует мифологических существ не только
+          как персонажей легенд, но и как визуальные модели,
+          через которые общество объясняет неизвестное,
+          опасное и неконтролируемое.
+        </p>
+
+        <p>
+          Главная задача сайта — собрать материал в понятную
+          систему и показать, как культурные образы могут
+          использоваться в современных творческих проектах.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mission section">
+  <div class="container mission__grid">
+    <div class="mission__heading">
+      <span class="section-kicker">
+        ЦЕЛЬ ПРОЕКТА
+      </span>
+
+      <h2>
+        Сделать мифологию рабочим инструментом для творчества
+      </h2>
+    </div>
+
+    <div class="mission__content">
+      <p>
+        Сайт объединяет энциклопедические материалы,
+        визуальный архив, словарь и аналитические статьи.
+      </p>
+
+      <p>
+        Пользователь может изучать существа по культуре,
+        среде обитания, типу и образу страха, который они
+        воплощают.
+      </p>
+
+      <a class="text-link" routerLink="/encyclopedia">
+        Перейти в энциклопедию
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="principles section">
+  <div class="container">
+    <header class="section-header">
+      <div>
+        <span class="section-kicker">
+          ПРИНЦИПЫ
+        </span>
+
+        <h2>
+          Как устроено исследование
+        </h2>
+      </div>
+
+      <p>
+        Каждый материал строится по общей системе,
+        чтобы образы из разных культур можно было сравнивать.
+      </p>
+    </header>
+
+    <div class="principles-grid">
+      @for (principle of principles; track principle.number) {
+        <article class="principle-card">
+          <span class="principle-card__number">
+            {{ principle.number }}
+          </span>
+
+          <h3>{{ principle.title }}</h3>
+
+          <p>{{ principle.description }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="classification section">
+  <div class="container classification__layout">
+    <div class="classification__visual">
+      <div class="classification__circle">
+        <span>СТРАХ</span>
+      </div>
+
+      <span class="classification__label classification__label--top">
+        КУЛЬТУРА
+      </span>
+
+      <span class="classification__label classification__label--right">
+        СРЕДА
+      </span>
+
+      <span class="classification__label classification__label--bottom">
+        ПОВЕДЕНИЕ
+      </span>
+
+      <span class="classification__label classification__label--left">
+        ВНЕШНИЙ ОБЛИК
+      </span>
+    </div>
+
+    <div class="classification__content">
+      <span class="section-kicker">
+        СИСТЕМА КЛАССИФИКАЦИИ
+      </span>
+
+      <h2>
+        В центре каждого образа находится страх
+      </h2>
+
+      <p>
+        Культура определяет форму существа, природная среда —
+        его поведение, а социальные нормы — причины его
+        появления.
+      </p>
+
+      <p>
+        Но в основе остаётся переживание, знакомое человеку
+        независимо от региона: страх смерти, темноты, воды,
+        одиночества, наказания или потери контроля.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="audience section">
+  <div class="container">
+    <header class="section-header section-header--compact">
+      <div>
+        <span class="section-kicker">
+          АУДИТОРИЯ
+        </span>
+
+        <h2>
+          Для кого создан архив
+        </h2>
+      </div>
+    </header>
+
+    <div class="audience-list">
+      @for (item of audience; track item.title; let index = $index) {
+        <article class="audience-item">
+          <span class="audience-item__number">
+            0{{ index + 1 }}
+          </span>
+
+          <h3>{{ item.title }}</h3>
+
+          <p>{{ item.description }}</p>
+
+          <span class="audience-item__symbol" aria-hidden="true">
+            +
+          </span>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="methodology section">
+  <div class="container methodology__grid">
+    <div class="methodology__heading">
+      <span class="section-kicker">
+        МЕТОДОЛОГИЯ
+      </span>
+
+      <h2>
+        От источника к цифровому материалу
+      </h2>
+
+      <p>
+        Работа над каждой записью проходит через четыре
+        последовательных этапа.
+      </p>
+    </div>
+
+    <div class="methodology__stages">
+      @for (stage of stages; track stage.number) {
+        <article class="stage-card">
+          <span>{{ stage.number }}</span>
+
+          <div>
+            <h3>{{ stage.title }}</h3>
+            <p>{{ stage.description }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="sources-section section">
+  <div class="container sources-section__grid">
+    <div>
+      <span class="section-kicker">
+        ИСТОЧНИКИ
+      </span>
+
+      <h2>
+        На чём основан проект
+      </h2>
+    </div>
+
+    <div class="sources-section__content">
+      <p>
+        Материалы формируются на основе фольклорных сборников,
+        научных публикаций, энциклопедий, музейных коллекций
+        и исторических визуальных архивов.
+      </p>
+
+      <p>
+        Тексты сайта не копируют источники дословно, а
+        перерабатывают информацию в единую исследовательскую
+        структуру.
+      </p>
+
+      <div class="source-types">
+        <span>ФОЛЬКЛОРНЫЕ СБОРНИКИ</span>
+        <span>НАУЧНЫЕ ИССЛЕДОВАНИЯ</span>
+        <span>МУЗЕЙНЫЕ АРХИВЫ</span>
+        <span>ИСТОРИЧЕСКИЕ ИЛЛЮСТРАЦИИ</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project-status section">
+  <div class="container project-status__inner">
+    <div>
+      <span class="section-kicker">
+        СТАТУС АРХИВА
+      </span>
+
+      <h2>
+        Проект продолжает пополняться
+      </h2>
+
+      <p>
+        Новые материалы, изображения и исследования могут
+        добавляться по мере развития цифровой коллекции.
+      </p>
+    </div>
+
+    <div class="project-status__actions">
+      <a class="button button--primary" routerLink="/encyclopedia">
+        <span>Открыть энциклопедию</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+
+      <a class="button button--outline" routerLink="/blog">
+        <span>Читать исследования</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+<a
+  class="card"
+  [routerLink]="['/encyclopedia', creature().slug]"
+>
+  <div class="card__image">
+    <img
+      [src]="creature().mainImage"
+      [alt]="creature().name"
+      loading="lazy"
+    />
+
+    <span class="card__archive">
+      АРХИВ № {{ creature().archiveNumber }}
+    </span>
+
+    <span class="card__type">
+      {{ creature().type }}
+    </span>
+  </div>
+
+  <div class="card__header">
+    <div>
+      <span class="card__culture">
+        {{ creature().culture }}
+      </span>
+
+      <h2>{{ creature().name }}</h2>
+
+      @if (creature().originalName) {
+        <span class="card__original">
+          {{ creature().originalName }}
+        </span>
+      }
+    </div>
+
+    <span class="card__arrow" aria-hidden="true">
+      ↗
+    </span>
+  </div>
+
+  <p class="card__description">
+    {{ creature().shortDescription }}
+  </p>
+
+  <div class="card__footer">
+    <span>{{ creature().habitat }}</span>
+
+    <span>
+      {{ creature().fears[0] }}
+    </span>
+  </div>
+</a>

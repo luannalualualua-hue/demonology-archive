@@ -1,0 +1,74 @@
+<header class="header">
+  <div class="header__inner container">
+    <a
+      class="brand"
+      routerLink="/"
+      aria-label="Демонология — главная страница"
+      (click)="closeMenu()"
+    >
+      <span class="brand__index">АРХИВ / 001</span>
+
+      <span class="brand__name">
+        Демонология
+      </span>
+    </a>
+
+    <button
+      class="menu-button"
+      type="button"
+      [class.menu-button--active]="menuOpen()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Открыть меню"
+      (click)="toggleMenu()"
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav
+      class="navigation"
+      [class.navigation--open]="menuOpen()"
+      aria-label="Главная навигация"
+    >
+      <a
+        routerLink="/encyclopedia"
+        routerLinkActive="navigation__link--active"
+        (click)="closeMenu()"
+      >
+        Энциклопедия
+      </a>
+
+      <a
+        routerLink="/gallery"
+        routerLinkActive="navigation__link--active"
+        (click)="closeMenu()"
+      >
+        Галерея
+      </a>
+
+      <a
+        routerLink="/glossary"
+        routerLinkActive="navigation__link--active"
+        (click)="closeMenu()"
+      >
+        Словарь
+      </a>
+
+      <a
+        routerLink="/blog"
+        routerLinkActive="navigation__link--active"
+        (click)="closeMenu()"
+      >
+        Исследования
+      </a>
+
+      <a
+        routerLink="/about"
+        routerLinkActive="navigation__link--active"
+        (click)="closeMenu()"
+      >
+        О проекте
+      </a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,231 @@
+@if (loading()) {
+  <section class="article-loading">
+    Загрузка исследования...
+  </section>
+} @else if (article(); as item) {
+  <article class="research-article">
+    <header class="article-hero">
+      <div class="article-hero__background">
+        <img
+          [src]="item.coverImage"
+          [alt]="item.title"
+        />
+      </div>
+
+      <div class="container article-hero__inner">
+        <div class="article-hero__top">
+          <a routerLink="/blog">
+            <span aria-hidden="true">←</span>
+            Все исследования
+          </a>
+
+          <div>
+            <span>{{ item.archiveNumber }}</span>
+            <span>{{ item.category }}</span>
+          </div>
+        </div>
+
+        <div class="article-hero__content">
+          <p class="article-hero__category">
+            {{ item.category }}
+          </p>
+
+          <h1>{{ item.title }}</h1>
+
+          <p class="article-hero__subtitle">
+            {{ item.subtitle }}
+          </p>
+        </div>
+
+        <div class="article-hero__footer">
+          <div>
+            <span>АВТОР</span>
+            <strong>{{ item.author }}</strong>
+          </div>
+
+          <div>
+            <span>ДАТА</span>
+            <strong>{{ item.publishedAt }}</strong>
+          </div>
+
+          <div>
+            <span>ВРЕМЯ ЧТЕНИЯ</span>
+            <strong>{{ item.readingTime }} минут</strong>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="article-body">
+      <div class="container article-body__layout">
+        <aside class="article-sidebar">
+          <div class="article-sidebar__sticky">
+            <span class="article-sidebar__label">
+              СОДЕРЖАНИЕ
+            </span>
+
+            <nav>
+              @for (section of item.sections; track section.id) {
+                <a [href]="'#' + section.id">
+                  <span>{{ section.number }}</span>
+                  {{ section.title }}
+                </a>
+              }
+            </nav>
+          </div>
+        </aside>
+
+        <main class="article-content">
+          <p class="article-introduction">
+            {{ item.introduction }}
+          </p>
+
+          @for (section of item.sections; track section.id) {
+            <section
+              class="research-section"
+              [attr.id]="section.id"
+            >
+              <div class="research-section__number">
+                {{ section.number }}
+              </div>
+
+              <div class="research-section__content">
+                <span class="research-section__label">
+                  {{ section.label }}
+                </span>
+
+                <h2>{{ section.title }}</h2>
+
+                @for (
+                  paragraph of section.paragraphs;
+                  track $index
+                ) {
+                  <p>{{ paragraph }}</p>
+                }
+
+                @if (section.quote) {
+                  <blockquote>
+                    {{ section.quote }}
+                  </blockquote>
+                }
+
+                @if (section.image) {
+                  <figure>
+                    <img
+                      [src]="section.image"
+                      [alt]="section.imageCaption || section.title"
+                      loading="lazy"
+                    />
+
+                    @if (section.imageCaption) {
+                      <figcaption>
+                        {{ section.imageCaption }}
+                      </figcaption>
+                    }
+                  </figure>
+                }
+              </div>
+            </section>
+          }
+
+          @if (item.relatedCreatures.length > 0) {
+            <section class="related-creatures">
+              <span class="related-creatures__label">
+                СВЯЗАННЫЕ МАТЕРИАЛЫ
+              </span>
+
+              <h2>Продолжить исследование</h2>
+
+              <div class="related-creatures__grid">
+                @for (
+                  creature of item.relatedCreatures;
+                  track creature.slug
+                ) {
+                  <a
+                    [routerLink]="[
+                      '/encyclopedia',
+                      creature.slug
+                    ]"
+                  >
+                    <span>
+                      АРХИВ № {{ creature.archiveNumber }}
+                    </span>
+
+                    <strong>{{ creature.name }}</strong>
+
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                }
+              </div>
+            </section>
+          }
+
+          <section class="article-sources">
+            <header>
+              <span>БИБЛИОГРАФИЯ</span>
+              <strong>{{ item.sources.length }}</strong>
+            </header>
+
+            <ol>
+              @for (source of item.sources; track $index) {
+                <li>
+                  <div>
+                    <strong>{{ source.title }}</strong>
+
+                    @if (source.author) {
+                      <span>{{ source.author }}</span>
+                    }
+                  </div>
+
+                  @if (source.year) {
+                    <span>{{ source.year }}</span>
+                  }
+                </li>
+              }
+            </ol>
+          </section>
+        </main>
+      </div>
+    </section>
+
+    <nav class="article-navigation">
+      <a
+        [routerLink]="[
+          '/blog',
+          previousArticle().slug
+        ]"
+      >
+        <span>← Предыдущее исследование</span>
+        <strong>{{ previousArticle().title }}</strong>
+      </a>
+
+      <a
+        class="article-navigation__next"
+        [routerLink]="[
+          '/blog',
+          nextArticle().slug
+        ]"
+      >
+        <span>Следующее исследование →</span>
+        <strong>{{ nextArticle().title }}</strong>
+      </a>
+    </nav>
+  </article>
+} @else {
+  <section class="article-not-found">
+    <div class="container">
+      <span>АРХИВ / 404</span>
+
+      <h1>Исследование не найдено</h1>
+
+      <p>
+        Возможно, материал был перемещён или ещё не добавлен
+        в архив.
+      </p>
+
+      <a routerLink="/blog">
+        Вернуться к исследованиям
+      </a>
+    </div>
+  </section>
+}

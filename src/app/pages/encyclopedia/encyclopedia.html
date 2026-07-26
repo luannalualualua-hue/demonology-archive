@@ -1,0 +1,231 @@
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <div class="page-hero__meta">
+      <span>АРХИВ / РАЗДЕЛ 02</span>
+      <span>{{ creatures.length }} МАТЕРИАЛОВ</span>
+    </div>
+
+    <div class="page-hero__content">
+      <div>
+        <p class="page-hero__eyebrow">
+          Каталог мифологических образов
+        </p>
+
+        <h1>Энциклопедия</h1>
+      </div>
+
+      <p class="page-hero__description">
+        Существа и духи из разных культур, классифицированные
+        по происхождению, среде обитания и человеческим страхам,
+        которые они воплощают.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="catalog">
+  <div class="container">
+    <div class="catalog__toolbar">
+      <label class="search-field">
+        <span class="search-field__label">ПОИСК ПО АРХИВУ</span>
+
+        <span class="search-field__control">
+          <input
+            type="search"
+            placeholder="Название, культура или образ страха"
+            [ngModel]="searchQuery()"
+            (ngModelChange)="updateSearch($event)"
+          />
+
+          <span aria-hidden="true">⌕</span>
+        </span>
+      </label>
+
+      <button
+        class="mobile-filter-button"
+        type="button"
+        (click)="toggleMobileFilters()"
+      >
+        <span>Фильтры</span>
+
+        @if (activeFiltersCount() > 0) {
+          <strong>{{ activeFiltersCount() }}</strong>
+        }
+
+        <span aria-hidden="true">+</span>
+      </button>
+
+      <div class="catalog__summary">
+        <span>НАЙДЕНО</span>
+
+        <strong>
+          {{ filteredCreatures().length }}
+        </strong>
+      </div>
+    </div>
+
+    <div class="catalog__layout">
+      <aside
+        class="filters"
+        [class.filters--open]="mobileFiltersOpen()"
+      >
+        <div class="filters__mobile-header">
+          <span>Фильтры архива</span>
+
+          <button
+            type="button"
+            aria-label="Закрыть фильтры"
+            (click)="closeMobileFilters()"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="filter-group">
+          <label for="culture-filter">
+            Культура
+          </label>
+
+          <select
+            id="culture-filter"
+            [ngModel]="selectedCulture()"
+            (ngModelChange)="updateCulture($event)"
+          >
+            <option value="">Все культуры</option>
+
+            @for (culture of cultures; track culture) {
+              <option [value]="culture">
+                {{ culture }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="type-filter">
+            Тип существа
+          </label>
+
+          <select
+            id="type-filter"
+            [ngModel]="selectedType()"
+            (ngModelChange)="updateType($event)"
+          >
+            <option value="">Все типы</option>
+
+            @for (type of types; track type) {
+              <option [value]="type">
+                {{ type }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="habitat-filter">
+            Среда обитания
+          </label>
+
+          <select
+            id="habitat-filter"
+            [ngModel]="selectedHabitat()"
+            (ngModelChange)="updateHabitat($event)"
+          >
+            <option value="">Все среды</option>
+
+            @for (habitat of habitats; track habitat) {
+              <option [value]="habitat">
+                {{ habitat }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="fear-filter">
+            Образ страха
+          </label>
+
+          <select
+            id="fear-filter"
+            [ngModel]="selectedFear()"
+            (ngModelChange)="updateFear($event)"
+          >
+            <option value="">Все страхи</option>
+
+            @for (fear of fears; track fear) {
+              <option [value]="fear">
+                {{ fear }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <button
+          class="reset-button"
+          type="button"
+          [disabled]="
+            activeFiltersCount() === 0 &&
+            searchQuery().length === 0
+          "
+          (click)="resetFilters()"
+        >
+          Сбросить фильтры
+        </button>
+
+        <div class="filters__note">
+          <span>ПРИНЦИП КЛАССИФИКАЦИИ</span>
+
+          <p>
+            Один образ может относиться сразу к нескольким
+            категориям страха.
+          </p>
+        </div>
+      </aside>
+
+      @if (mobileFiltersOpen()) {
+        <button
+          class="filters-backdrop"
+          type="button"
+          aria-label="Закрыть фильтры"
+          (click)="closeMobileFilters()"
+        ></button>
+      }
+
+      <div class="catalog__results">
+        @if (filteredCreatures().length > 0) {
+          <div class="creatures-grid">
+            @for (
+              creature of filteredCreatures();
+              track creature.slug
+            ) {
+              <app-creature-card
+                [creature]="creature"
+              />
+            }
+          </div>
+        } @else {
+          <div class="empty-state">
+            <span class="empty-state__index">
+              АРХИВ / 404
+            </span>
+
+            <h2>Материалы не найдены</h2>
+
+            <p>
+              Попробуйте изменить поисковый запрос или сбросить
+              выбранные категории.
+            </p>
+
+            <button
+              type="button"
+              (click)="resetFilters()"
+            >
+              Сбросить фильтры
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

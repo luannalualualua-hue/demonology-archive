@@ -1,0 +1,404 @@
+@if (loading()) {
+  <section class="loading-state">
+    <span>Загрузка архивного материала...</span>
+  </section>
+} @else if (creature(); as item) {
+  <article class="creature-page">
+    <section class="creature-hero">
+      <div class="creature-hero__image">
+        <img
+          [src]="item.mainImage"
+          [alt]="item.name"
+        />
+
+        <div
+          class="creature-hero__overlay"
+          aria-hidden="true"
+        ></div>
+
+        <div
+          class="creature-hero__noise"
+          aria-hidden="true"
+        ></div>
+      </div>
+
+      <div class="container creature-hero__inner">
+        <div class="creature-hero__top">
+          <a
+            class="back-link"
+            routerLink="/encyclopedia"
+          >
+            <span aria-hidden="true">←</span>
+            Вернуться в архив
+          </a>
+
+          <div class="creature-hero__archive">
+            <span>АРХИВ № {{ item.archiveNumber }}</span>
+            <span>{{ item.region }}</span>
+          </div>
+        </div>
+
+        <div class="creature-hero__content">
+          <div class="creature-hero__heading">
+            <p class="creature-hero__culture">
+              {{ item.culture }}
+            </p>
+
+            <h1>{{ item.name }}</h1>
+
+            @if (item.originalName) {
+              <p class="creature-hero__original">
+                {{ item.originalName }}
+              </p>
+            }
+          </div>
+
+          <div class="creature-hero__summary">
+            <p>
+              {{ item.shortDescription }}
+            </p>
+
+            <a
+              class="scroll-link"
+              href="#archive-content"
+            >
+              Читать материал
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="creature-hero__facts">
+          <div class="hero-fact">
+            <span>ТИП</span>
+            <strong>{{ item.type }}</strong>
+          </div>
+
+          <div class="hero-fact">
+            <span>СРЕДА</span>
+            <strong>{{ item.habitat }}</strong>
+          </div>
+
+          <div class="hero-fact">
+            <span>ПРОИСХОЖДЕНИЕ</span>
+            <strong>{{ item.region }}</strong>
+          </div>
+
+          <div class="hero-fact hero-fact--wide">
+            <span>ОБРАЗЫ СТРАХА</span>
+
+            <div class="fear-tags">
+              @for (fear of item.fears; track fear) {
+                <span>{{ fear }}</span>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="archive-content"
+      class="archive-content"
+    >
+      <div class="container archive-content__layout">
+        <aside class="archive-sidebar">
+          <div class="archive-sidebar__sticky">
+            <span class="sidebar-label">
+              СОДЕРЖАНИЕ МАТЕРИАЛА
+            </span>
+
+            <nav aria-label="Содержание статьи">
+              <a href="#introduction">Образ</a>
+              <a href="#appearance">Внешний вид</a>
+              <a href="#behavior">Поведение</a>
+              <a href="#origin">Происхождение</a>
+              <a href="#symbolism">Символика</a>
+              <a href="#creative-use">Для творческих проектов</a>
+            </nav>
+
+            <div class="archive-sidebar__index">
+              <span>КАТАЛОЖНЫЙ ИНДЕКС</span>
+              <strong>
+                DMN–{{ item.archiveNumber }}
+              </strong>
+            </div>
+          </div>
+        </aside>
+
+        <div class="archive-article">
+          <section
+            id="introduction"
+            class="article-section article-section--lead"
+          >
+            <div class="article-section__number">
+              01
+            </div>
+
+            <div class="article-section__body">
+              <span class="article-section__label">
+                ОБРАЗ
+              </span>
+
+              <p class="article-lead">
+                {{ item.introduction }}
+              </p>
+            </div>
+          </section>
+
+          <section
+            id="appearance"
+            class="article-section"
+          >
+            <div class="article-section__number">
+              02
+            </div>
+
+            <div class="article-section__body">
+              <span class="article-section__label">
+                ВИЗУАЛЬНЫЙ ОБЛИК
+              </span>
+
+              <h2>Внешний вид</h2>
+
+              <p>
+                {{ item.appearance }}
+              </p>
+            </div>
+          </section>
+
+          <section
+            id="behavior"
+            class="article-section"
+          >
+            <div class="article-section__number">
+              03
+            </div>
+
+            <div class="article-section__body">
+              <span class="article-section__label">
+                ПОВЕДЕНЧЕСКАЯ МОДЕЛЬ
+              </span>
+
+              <h2>Поведение</h2>
+
+              <p>
+                {{ item.behavior }}
+              </p>
+            </div>
+          </section>
+
+          <figure class="archive-figure">
+            <div class="archive-figure__image">
+              <img
+                [src]="item.mainImage"
+                [alt]="item.name"
+                loading="lazy"
+              />
+            </div>
+
+            <figcaption>
+              <span>
+                АРХИВНЫЙ ОБРАЗ / {{ item.archiveNumber }}
+              </span>
+
+              <span>
+                {{ item.culture }}
+              </span>
+            </figcaption>
+          </figure>
+
+          <section
+            id="origin"
+            class="article-section"
+          >
+            <div class="article-section__number">
+              04
+            </div>
+
+            <div class="article-section__body">
+              <span class="article-section__label">
+                КУЛЬТУРНЫЙ КОНТЕКСТ
+              </span>
+
+              <h2>Происхождение образа</h2>
+
+              <p>
+                {{ item.origin }}
+              </p>
+            </div>
+          </section>
+
+          <section
+            id="symbolism"
+            class="article-section article-section--symbolism"
+          >
+            <div class="article-section__number">
+              05
+            </div>
+
+            <div class="article-section__body">
+              <span class="article-section__label">
+                ИНТЕРПРЕТАЦИЯ
+              </span>
+
+              <h2>Какой страх воплощает образ</h2>
+
+              <blockquote>
+                {{ item.symbolism }}
+              </blockquote>
+
+              <div class="symbolism-tags">
+                @for (fear of item.fears; track fear) {
+                  <span>{{ fear }}</span>
+                }
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="creative-use"
+            class="creative-section"
+          >
+            <div class="creative-section__header">
+              <div>
+                <span class="creative-section__index">
+                  ПРИКЛАДНОЙ МАТЕРИАЛ / 06
+                </span>
+
+                <h2>
+                  Для творческих проектов
+                </h2>
+              </div>
+
+              <span
+                class="creative-section__symbol"
+                aria-hidden="true"
+              >
+                ✦
+              </span>
+            </div>
+
+            <p class="creative-section__text">
+              {{ item.creativeUse }}
+            </p>
+
+            <div class="creative-section__audience">
+              <span>ГЕЙМ-ДИЗАЙН</span>
+              <span>СЦЕНАРИЙ</span>
+              <span>КОНЦЕПТ-АРТ</span>
+              <span>ВИЗУАЛЬНОЕ ИССЛЕДОВАНИЕ</span>
+            </div>
+          </section>
+
+          <section class="archive-data">
+            <header>
+              <span>АРХИВНАЯ КАРТОЧКА</span>
+              <strong>DMN–{{ item.archiveNumber }}</strong>
+            </header>
+
+            <dl>
+              <div>
+                <dt>Название</dt>
+                <dd>{{ item.name }}</dd>
+              </div>
+
+              <div>
+                <dt>Оригинальное название</dt>
+                <dd>{{ item.originalName || 'Не указано' }}</dd>
+              </div>
+
+              <div>
+                <dt>Культура</dt>
+                <dd>{{ item.culture }}</dd>
+              </div>
+
+              <div>
+                <dt>Регион</dt>
+                <dd>{{ item.region }}</dd>
+              </div>
+
+              <div>
+                <dt>Тип</dt>
+                <dd>{{ item.type }}</dd>
+              </div>
+
+              <div>
+                <dt>Среда обитания</dt>
+                <dd>{{ item.habitat }}</dd>
+              </div>
+            </dl>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <nav
+      class="creature-navigation"
+      aria-label="Другие материалы"
+    >
+      <a
+        class="creature-navigation__item creature-navigation__item--previous"
+        [routerLink]="[
+          '/encyclopedia',
+          previousCreature().slug
+        ]"
+      >
+        <span class="creature-navigation__direction">
+          ← Предыдущий материал
+        </span>
+
+        <div>
+          <span>
+            АРХИВ № {{ previousCreature().archiveNumber }}
+          </span>
+
+          <strong>
+            {{ previousCreature().name }}
+          </strong>
+        </div>
+      </a>
+
+      <a
+        class="creature-navigation__item creature-navigation__item--next"
+        [routerLink]="[
+          '/encyclopedia',
+          nextCreature().slug
+        ]"
+      >
+        <span class="creature-navigation__direction">
+          Следующий материал →
+        </span>
+
+        <div>
+          <span>
+            АРХИВ № {{ nextCreature().archiveNumber }}
+          </span>
+
+          <strong>
+            {{ nextCreature().name }}
+          </strong>
+        </div>
+      </a>
+    </nav>
+  </article>
+} @else {
+  <section class="not-found">
+    <div class="container not-found__inner">
+      <span class="not-found__index">
+        АРХИВ / 404
+      </span>
+
+      <h1>Материал не найден</h1>
+
+      <p>
+        Возможно, запись была перемещена, удалена или ещё не
+        добавлена в цифровой архив.
+      </p>
+
+      <a routerLink="/encyclopedia">
+        Вернуться в энциклопедию
+      </a>
+    </div>
+  </section>
+}

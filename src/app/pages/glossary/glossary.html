@@ -1,0 +1,247 @@
+<section class="glossary-hero">
+  <div class="container glossary-hero__inner">
+    <div class="glossary-hero__meta">
+      <span>АРХИВ / РАЗДЕЛ 04</span>
+      <span>{{ terms.length }} ТЕРМИНОВ</span>
+    </div>
+
+    <div class="glossary-hero__content">
+      <div>
+        <p class="glossary-hero__eyebrow">
+          Термины и определения
+        </p>
+
+        <h1>Словарь</h1>
+      </div>
+
+      <p>
+        Основные понятия, необходимые для работы с мифологией,
+        фольклором, визуальными образами и культурными моделями
+        страха.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="glossary-section">
+  <div class="container">
+    <div class="glossary-toolbar">
+      <label class="glossary-search">
+        <span>ПОИСК ПО СЛОВАРЮ</span>
+
+        <div class="glossary-search__control">
+          <input
+            type="search"
+            placeholder="Введите термин или часть определения"
+            [ngModel]="searchQuery()"
+            (ngModelChange)="updateSearch($event)"
+          />
+
+          <span aria-hidden="true">⌕</span>
+        </div>
+      </label>
+
+      <label class="category-filter">
+        <span>КАТЕГОРИЯ</span>
+
+        <select
+          [ngModel]="selectedCategory()"
+          (ngModelChange)="selectCategory($event)"
+        >
+          <option value="">Все категории</option>
+
+          @for (category of categories; track category) {
+            <option [value]="category">
+              {{ category }}
+            </option>
+          }
+        </select>
+      </label>
+
+      <div class="glossary-result">
+        <span>НАЙДЕНО</span>
+        <strong>{{ filteredTerms().length }}</strong>
+      </div>
+    </div>
+
+    <nav
+      class="alphabet-navigation"
+      aria-label="Алфавитная навигация"
+    >
+      <button
+        type="button"
+        [class.alphabet-navigation__item--active]="
+          selectedLetter() === ''
+        "
+        (click)="selectLetter('')"
+      >
+        Все
+      </button>
+
+      @for (letter of letters; track letter) {
+        <button
+          type="button"
+          [class.alphabet-navigation__item--active]="
+            selectedLetter() === letter
+          "
+          (click)="selectLetter(letter)"
+        >
+          {{ letter }}
+        </button>
+      }
+    </nav>
+
+    @if (hasFilters()) {
+      <div class="active-filters">
+        <span>Активная выборка:</span>
+
+        @if (selectedLetter()) {
+          <button
+            type="button"
+            (click)="selectLetter(selectedLetter())"
+          >
+            Буква {{ selectedLetter() }}
+            <span aria-hidden="true">×</span>
+          </button>
+        }
+
+        @if (selectedCategory()) {
+          <button
+            type="button"
+            (click)="selectCategory('')"
+          >
+            {{ selectedCategory() }}
+            <span aria-hidden="true">×</span>
+          </button>
+        }
+
+        @if (searchQuery()) {
+          <button
+            type="button"
+            (click)="updateSearch('')"
+          >
+            «{{ searchQuery() }}»
+            <span aria-hidden="true">×</span>
+          </button>
+        }
+
+        <button
+          class="active-filters__reset"
+          type="button"
+          (click)="resetFilters()"
+        >
+          Сбросить всё
+        </button>
+      </div>
+    }
+
+    @if (groupedTerms().length > 0) {
+      <div class="glossary-list">
+        @for (group of groupedTerms(); track group.letter) {
+          <section
+            class="letter-group"
+            [attr.id]="'letter-' + group.letter"
+          >
+            <div class="letter-group__letter">
+              {{ group.letter }}
+            </div>
+
+            <div class="letter-group__terms">
+              @for (term of group.terms; track term.id) {
+                <article
+                  class="term-card"
+                  [class.term-card--open]="
+                    openedTermId() === term.id
+                  "
+                >
+                  <button
+                    class="term-card__header"
+                    type="button"
+                    [attr.aria-expanded]="
+                      openedTermId() === term.id
+                    "
+                    (click)="toggleTerm(term.id)"
+                  >
+                    <div class="term-card__heading">
+                      <span class="term-card__category">
+                        {{ term.category }}
+                      </span>
+
+                      <h2>{{ term.term }}</h2>
+
+                      <p>
+                        {{ term.shortDefinition }}
+                      </p>
+                    </div>
+
+                    <span
+                      class="term-card__symbol"
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
+                  </button>
+
+                  @if (openedTermId() === term.id) {
+                    <div class="term-card__content">
+                      <div class="term-card__definition">
+                        <span>ПОЛНОЕ ОПРЕДЕЛЕНИЕ</span>
+
+                        <p>
+                          {{ term.fullDefinition }}
+                        </p>
+                      </div>
+
+                      @if (term.relatedCreatures.length > 0) {
+                        <div class="term-card__related">
+                          <span>
+                            СВЯЗАННЫЕ МАТЕРИАЛЫ
+                          </span>
+
+                          <div>
+                            @for (
+                              creature of term.relatedCreatures;
+                              track creature.slug
+                            ) {
+                              <a
+                                [routerLink]="[
+                                  '/encyclopedia',
+                                  creature.slug
+                                ]"
+                              >
+                                {{ creature.name }}
+                                <span aria-hidden="true">↗</span>
+                              </a>
+                            }
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  }
+                </article>
+              }
+            </div>
+          </section>
+        }
+      </div>
+    } @else {
+      <div class="glossary-empty">
+        <span>СЛОВАРЬ / 404</span>
+
+        <h2>Термины не найдены</h2>
+
+        <p>
+          Попробуйте изменить поисковый запрос,
+          выбранную букву или категорию.
+        </p>
+
+        <button
+          type="button"
+          (click)="resetFilters()"
+        >
+          Показать весь словарь
+        </button>
+      </div>
+    }
+  </div>
+</section>

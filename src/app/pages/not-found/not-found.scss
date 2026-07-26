@@ -1,0 +1,222 @@
+:host {
+  display: block;
+}
+
+.not-found-page {
+  position: relative;
+  min-height: 100svh;
+  padding-top: 88px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.not-found-page__background {
+  position: absolute;
+  z-index: -3;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 8, 7, 0.98) 0%,
+      rgba(8, 8, 7, 0.83) 52%,
+      rgba(8, 8, 7, 0.44) 100%
+    ),
+    linear-gradient(
+      to top,
+      rgba(8, 8, 7, 0.98),
+      transparent 60%
+    ),
+    url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1900&q=90')
+      center / cover no-repeat;
+
+  filter:
+    grayscale(1)
+    sepia(0.08)
+    contrast(1.2)
+    brightness(0.68);
+}
+
+.not-found-page__noise {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  opacity: 0.14;
+  pointer-events: none;
+  background-image:
+    repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 2px
+    );
+  background-size: 5px 5px;
+  mix-blend-mode: soft-light;
+}
+
+.not-found-page__inner {
+  display: flex;
+  min-height: calc(100svh - 88px);
+  padding-top: 36px;
+  padding-bottom: 32px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.not-found-page__meta,
+.not-found-page__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  color: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.not-found-page__content {
+  display: grid;
+  padding: clamp(65px, 10vh, 130px) 0;
+  align-items: center;
+  grid-template-columns: minmax(300px, 0.8fr) minmax(320px, 1fr);
+  gap: clamp(50px, 10vw, 170px);
+}
+
+.not-found-page__number {
+  color: rgba(232, 224, 207, 0.08);
+  font-family: var(--font-display);
+  font-size: clamp(180px, 28vw, 440px);
+  letter-spacing: -0.1em;
+  line-height: 0.58;
+  user-select: none;
+}
+
+.not-found-page__message {
+  max-width: 720px;
+
+  h1 {
+    margin: 20px 0 30px;
+    font-family: var(--font-display);
+    font-size: clamp(58px, 7vw, 105px);
+    font-weight: 400;
+    letter-spacing: -0.055em;
+    line-height: 0.9;
+  }
+}
+
+.not-found-page__eyebrow {
+  margin: 0;
+  color: var(--color-accent-light);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.not-found-page__description {
+  max-width: 590px;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.not-found-page__actions {
+  display: flex;
+  margin-top: 45px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 54px;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+
+  &--primary {
+    min-width: 230px;
+    background: var(--color-text);
+    color: var(--color-background);
+
+    &:hover {
+      background: var(--color-accent-light);
+    }
+  }
+
+  &--outline {
+    min-width: 245px;
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
+
+    &:hover {
+      border-color: var(--color-text);
+      background: var(--color-text);
+      color: var(--color-background);
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .not-found-page__content {
+    align-items: start;
+    grid-template-columns: 1fr;
+    gap: 55px;
+  }
+
+  .not-found-page__number {
+    font-size: clamp(160px, 46vw, 330px);
+  }
+}
+
+@media (max-width: 600px) {
+  .not-found-page {
+    min-height: 800px;
+    padding-top: 74px;
+  }
+
+  .not-found-page__inner {
+    min-height: calc(800px - 74px);
+  }
+
+  .not-found-page__meta,
+  .not-found-page__footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .not-found-page__content {
+    padding: 60px 0;
+    gap: 40px;
+  }
+
+  .not-found-page__number {
+    font-size: clamp(145px, 48vw, 230px);
+  }
+
+  .not-found-page__message h1 {
+    font-size: clamp(52px, 16vw, 74px);
+  }
+
+  .not-found-page__actions {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+    min-width: 0;
+  }
+}

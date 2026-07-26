@@ -1,0 +1,121 @@
+@if (selectedImage(); as image) {
+  <div
+    class="lightbox"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="'Изображение: ' + image.title"
+    (click)="close()"
+  >
+    <header
+      class="lightbox__header"
+      (click)="preventClose($event)"
+    >
+      <div class="lightbox__archive">
+        <span>ГАЛЕРЕЯ / {{ image.archiveNumber }}</span>
+        <span>{{ counter() }}</span>
+      </div>
+
+      <button
+        class="lightbox__close"
+        type="button"
+        aria-label="Закрыть изображение"
+        (click)="close()"
+      >
+        <span>Закрыть</span>
+        <strong aria-hidden="true">×</strong>
+      </button>
+    </header>
+
+    <div
+      class="lightbox__content"
+      (click)="preventClose($event)"
+    >
+      <button
+        class="lightbox__navigation lightbox__navigation--previous"
+        type="button"
+        aria-label="Предыдущее изображение"
+        (click)="showPrevious()"
+      >
+        ←
+      </button>
+
+      <figure class="lightbox__figure">
+        <div class="lightbox__image">
+          <img
+            [src]="image.image"
+            [alt]="image.title"
+          />
+        </div>
+
+        <figcaption>
+          <div class="lightbox__heading">
+            <span>{{ image.culture }}</span>
+            <h2>{{ image.title }}</h2>
+            <p>{{ image.creatureName }}</p>
+          </div>
+
+          <div class="lightbox__description">
+            <p>{{ image.description }}</p>
+
+            <dl>
+              <div>
+                <dt>Категория</dt>
+                <dd>{{ image.category }}</dd>
+              </div>
+
+              <div>
+                <dt>Регион</dt>
+                <dd>{{ image.region }}</dd>
+              </div>
+
+              @if (image.author) {
+                <div>
+                  <dt>Автор</dt>
+                  <dd>{{ image.author }}</dd>
+                </div>
+              }
+
+              @if (image.year) {
+                <div>
+                  <dt>Год</dt>
+                  <dd>{{ image.year }}</dd>
+                </div>
+              }
+
+              @if (image.source) {
+                <div>
+                  <dt>Источник</dt>
+                  <dd>{{ image.source }}</dd>
+                </div>
+              }
+
+              @if (image.license) {
+                <div>
+                  <dt>Лицензия</dt>
+                  <dd>{{ image.license }}</dd>
+                </div>
+              }
+            </dl>
+          </div>
+        </figcaption>
+      </figure>
+
+      <button
+        class="lightbox__navigation lightbox__navigation--next"
+        type="button"
+        aria-label="Следующее изображение"
+        (click)="showNext()"
+      >
+        →
+      </button>
+    </div>
+
+    <footer
+      class="lightbox__footer"
+      (click)="preventClose($event)"
+    >
+      <span>← → Для навигации</span>
+      <span>ESC Для выхода</span>
+    </footer>
+  </div>
+}

@@ -1,0 +1,141 @@
+<section class="blog-hero">
+  <div class="container blog-hero__inner">
+    <div class="blog-hero__meta">
+      <span>АРХИВ / РАЗДЕЛ 05</span>
+      <span>{{ articles.length }} ИССЛЕДОВАНИЯ</span>
+    </div>
+
+    <div class="blog-hero__content">
+      <div>
+        <p class="blog-hero__eyebrow">
+          Аналитические материалы
+        </p>
+
+        <h1>Исследования</h1>
+      </div>
+
+      <p>
+        Статьи о визуальном языке мифологии, культурных
+        моделях страха и адаптации фольклорных образов
+        для современных творческих проектов.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="blog-section">
+  <div class="container">
+    <nav
+      class="category-navigation"
+      aria-label="Категории статей"
+    >
+      <button
+        type="button"
+        [class.category-navigation__item--active]="
+          selectedCategory() === ''
+        "
+        (click)="selectCategory('')"
+      >
+        Все материалы
+      </button>
+
+      @for (category of categories; track category) {
+        <button
+          type="button"
+          [class.category-navigation__item--active]="
+            selectedCategory() === category
+          "
+          (click)="selectCategory(category)"
+        >
+          {{ category }}
+        </button>
+      }
+    </nav>
+
+    @if (featuredArticle(); as article) {
+      <a
+        class="featured-article"
+        [routerLink]="['/blog', article.slug]"
+      >
+        <div class="featured-article__image">
+          <img
+            [src]="article.coverImage"
+            [alt]="article.title"
+          />
+
+          <span class="featured-article__archive">
+            {{ article.archiveNumber }}
+          </span>
+        </div>
+
+        <div class="featured-article__content">
+          <div class="featured-article__top">
+            <span>{{ article.category }}</span>
+            <span>{{ article.readingTime }} МИН ЧТЕНИЯ</span>
+          </div>
+
+          <div>
+            <h2>{{ article.title }}</h2>
+
+            <p class="featured-article__subtitle">
+              {{ article.subtitle }}
+            </p>
+          </div>
+
+          <div class="featured-article__bottom">
+            <p>{{ article.preview }}</p>
+
+            <span class="featured-article__link">
+              Читать исследование
+              <span aria-hidden="true">↗</span>
+            </span>
+          </div>
+        </div>
+      </a>
+    }
+
+    @if (remainingArticles().length > 0) {
+      <div class="articles-grid">
+        @for (
+          article of remainingArticles();
+          track article.slug
+        ) {
+          <a
+            class="article-card"
+            [routerLink]="['/blog', article.slug]"
+          >
+            <div class="article-card__image">
+              <img
+                [src]="article.coverImage"
+                [alt]="article.title"
+                loading="lazy"
+              />
+
+              <span>{{ article.archiveNumber }}</span>
+            </div>
+
+            <div class="article-card__meta">
+              <span>{{ article.category }}</span>
+              <span>{{ article.readingTime }} МИН</span>
+            </div>
+
+            <h2>{{ article.title }}</h2>
+
+            <p class="article-card__subtitle">
+              {{ article.subtitle }}
+            </p>
+
+            <p class="article-card__preview">
+              {{ article.preview }}
+            </p>
+
+            <div class="article-card__footer">
+              <span>{{ article.publishedAt }}</span>
+              <span aria-hidden="true">↗</span>
+            </div>
+          </a>
+        }
+      </div>
+    }
+  </div>
+</section>
