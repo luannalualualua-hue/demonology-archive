@@ -16,7 +16,7 @@ export const ARTICLES: Article[] = [
     readingTime: 8,
 
     coverImage:
-      'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1800&q=90',
+      'assets/editorial/forest-remember.webp',
 
     preview:
       'Лесные духи, плачущие женщины, опасные водные существа и предвестники смерти появляются в культурах, которые долгое время не контактировали друг с другом.',
@@ -49,7 +49,7 @@ export const ARTICLES: Article[] = [
           'Ландшафт становится не просто местом действия. Он формирует поведение, внешний вид и символическое значение мифологического персонажа.',
         ],
         image:
-          'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1600&q=90',
+          'assets/editorial/forest-remember.webp',
         imageCaption:
           'Лес как пространство потери ориентации и человеческого контроля',
       },
@@ -129,7 +129,7 @@ export const ARTICLES: Article[] = [
     readingTime: 9,
 
     coverImage:
-      'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=90',
+      'assets/editorial/women-fear.webp',
 
     preview:
       'Почему женские мифологические персонажи так часто связываются с водой, ночью, смертью, материнством и нарушением общественных правил.',
@@ -162,7 +162,7 @@ export const ARTICLES: Article[] = [
           'Образ женского духа делает эту границу эмоционально насыщенной, связывая её с утратой, любовью, виной и памятью.',
         ],
         image:
-          'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=90',
+          'assets/editorial/water-border.webp',
         imageCaption:
           'Вода как визуальная граница между известным и скрытым',
       },
@@ -242,7 +242,7 @@ export const ARTICLES: Article[] = [
     readingTime: 7,
 
     coverImage:
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=90',
+      'assets/editorial/water-border.webp',
 
     preview:
       'Вода отражает, скрывает и искажает. Поэтому в мифологии она становится естественной границей между человеческим пространством и неизвестностью.',
@@ -286,7 +286,7 @@ export const ARTICLES: Article[] = [
           'Водное существо может охранять этот переход, требовать плату или проверять героя.',
         ],
         image:
-          'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1600&q=90',
+          'assets/editorial/water-border.webp',
         imageCaption:
           'Берег как лиминальное пространство',
       },
@@ -345,7 +345,7 @@ export const ARTICLES: Article[] = [
     readingTime: 10,
 
     coverImage:
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1800&q=90',
+      'assets/editorial/game-design.webp',
 
     preview:
       'Сильная адаптация начинается не с внешнего вида монстра, а с понимания того, какую функцию он выполнял в первоначальной легенде.',
@@ -389,7 +389,7 @@ export const ARTICLES: Article[] = [
           'Таким образом, персонаж проявляется через окружение ещё до непосредственного появления.',
         ],
         image:
-          'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1600&q=90',
+          'assets/editorial/game-design.webp',
         imageCaption:
           'Окружение как часть поведения существа',
       },

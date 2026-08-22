@@ -9,7 +9,10 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { Creature } from '../../core/models/creature.model';
+import {
+  Creature,
+  CreatureGalleryImage,
+} from '../../core/models/creature.model';
 import { CreaturesService } from '../../core/services/creatures.service';
 
 @Component({
@@ -61,6 +64,52 @@ export class CreatureDetails {
     return this.creatures[index + 1];
   });
 
+  readonly visualGallery = computed<CreatureGalleryImage[]>(() => {
+    const item = this.creature();
+
+    if (!item) {
+      return [];
+    }
+
+    const visuals: CreatureGalleryImage[] = [
+      {
+        src: item.mainImage,
+        alt: item.name,
+        caption: `Архивный образ: ${item.name}`,
+      },
+    ];
+
+    if (item.gallery.length > 0) {
+      visuals.push(...item.gallery.slice(0, 2));
+    } else {
+      visuals.push(this.getHabitatVisual(item));
+      visuals.push({
+        src: 'assets/editorial/about-grimoire.webp',
+        alt: 'Архивные материалы и гримуар',
+        caption: 'Материальный контекст: архив, легенды и визуальная память',
+      });
+    }
+
+    return visuals.slice(0, 3);
+  });
+
+  readonly relatedArchive = computed(() => {
+    const item = this.creature();
+
+    if (!item) {
+      return [];
+    }
+
+    return this.creatures
+      .filter((candidate) => candidate.slug !== item.slug)
+      .filter(
+        (candidate) =>
+          candidate.culture === item.culture ||
+          candidate.fears.some((fear) => item.fears.includes(fear)),
+      )
+      .slice(0, 3);
+  });
+
   constructor() {
     this.route.paramMap
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -86,5 +135,43 @@ export class CreatureDetails {
           behavior: 'instant',
         });
       });
+  }
+
+  private getHabitatVisual(item: Creature): CreatureGalleryImage {
+    const habitat = item.habitat.toLocaleLowerCase('ru');
+
+    if (habitat.includes('вод') || habitat.includes('болот')) {
+      return {
+        src: 'assets/editorial/water-border.webp',
+        alt: 'Водная граница',
+        caption: 'Среда обитания: вода как граница между мирами',
+      };
+    }
+
+    if (habitat.includes('лес')) {
+      return {
+        src: 'assets/editorial/forest-remember.webp',
+        alt: 'Лесной пейзаж',
+        caption: 'Среда обитания: лес как пространство потери ориентации',
+      };
+    }
+
+    if (
+      habitat.includes('снег') ||
+      habitat.includes('гор') ||
+      habitat.includes('холод')
+    ) {
+      return {
+        src: 'assets/editorial/about-mountains.webp',
+        alt: 'Горный зимний ландшафт',
+        caption: 'Среда обитания: холод, высота и уязвимость человека',
+      };
+    }
+
+    return {
+      src: 'assets/editorial/archive-guide.webp',
+      alt: 'Архивный путеводитель',
+      caption: 'Контекст образа: путь, порог и пограничное пространство',
+    };
   }
 }

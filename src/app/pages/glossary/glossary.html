@@ -1,4 +1,12 @@
 <section class="glossary-hero">
+  <img class="glossary-hero__corner" src="assets/decor/corner-ornament.svg" alt="" aria-hidden="true" />
+  <img class="glossary-hero__compass" src="assets/decor/compass.svg" alt="" aria-hidden="true" />
+  <img
+    class="glossary-hero__image"
+    src="assets/editorial/glossary-grimoire.webp"
+    alt=""
+    aria-hidden="true"
+  />
   <div class="container glossary-hero__inner">
     <div class="glossary-hero__meta">
       <span>АРХИВ / РАЗДЕЛ 04</span>
@@ -23,7 +31,47 @@
   </div>
 </section>
 
+<section class="glossary-visual-index" aria-label="Визуальный указатель словаря">
+  <div class="container glossary-visual-index__grid">
+    <article class="glossary-visual-card glossary-visual-card--wide">
+      <img src="assets/editorial/glossary-codex-collage.webp" alt="Коллаж образов и терминов мифологического словаря" />
+      <div>
+        <span>СУЩЕСТВА / ОБРАЗЫ</span>
+        <strong>Фигуры страха</strong>
+      </div>
+    </article>
+
+    <article class="glossary-visual-card">
+      <img src="assets/editorial/glossary-demon.webp" alt="Демонический образ" />
+      <div>
+        <span>ТЕРМИНЫ / СИМВОЛЫ</span>
+        <strong>Язык демонов</strong>
+      </div>
+    </article>
+
+    <article class="glossary-visual-card">
+      <img src="assets/editorial/glossary-nature.webp" alt="Дух природы" />
+      <div>
+        <span>СРЕДА / ФОЛЬКЛОР</span>
+        <strong>Природа как миф</strong>
+      </div>
+    </article>
+  </div>
+</section>
+
 <section class="glossary-section">
+  <img
+    class="glossary-section__raven"
+    src="assets/decor/raven.svg"
+    alt=""
+    aria-hidden="true"
+  />
+  <img
+    class="glossary-section__sigil"
+    src="assets/decor/sigil.svg"
+    alt=""
+    aria-hidden="true"
+  />
   <div class="container">
     <div class="glossary-toolbar">
       <label class="glossary-search">
@@ -154,6 +202,14 @@
                     openedTermId() === term.id
                   "
                 >
+                  <img
+                    class="term-card__illustration"
+                    [class.term-card__illustration--contain]="isContainedIllustration(term)"
+                    [src]="getTermIllustration(term)"
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                  />
                   <button
                     class="term-card__header"
                     type="button"

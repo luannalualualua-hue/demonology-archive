@@ -1,24 +1,37 @@
 <section class="gallery-hero">
+  <img class="gallery-hero__corner" src="assets/decor/corner-ornament.svg" alt="" aria-hidden="true" />
+  <img class="gallery-hero__compass" src="assets/decor/compass.svg" alt="" aria-hidden="true" />
   <div class="container gallery-hero__inner">
     <div class="gallery-hero__meta">
       <span>АРХИВ / РАЗДЕЛ 03</span>
       <span>{{ images.length }} ИЗОБРАЖЕНИЙ</span>
     </div>
 
-    <div class="gallery-hero__content">
-      <div>
-        <p class="gallery-hero__eyebrow">
-          Визуальный архив
-        </p>
+    <div class="gallery-hero__layout">
+      <div class="gallery-hero__content">
+        <div>
+          <p class="gallery-hero__eyebrow">
+            Визуальный архив
+          </p>
 
-        <h1>Галерея</h1>
+          <h1>Галерея</h1>
+        </div>
+
+        <p>
+          Коллекция образов, пейзажей и визуальных мотивов,
+          связанных с мифологическими существами и культурными
+          представлениями о страхе.
+        </p>
       </div>
 
-      <p>
-        Коллекция образов, пейзажей и визуальных мотивов,
-        связанных с мифологическими существами и культурными
-        представлениями о страхе.
-      </p>
+      <figure class="gallery-hero__visual">
+        <img
+          class="gallery-hero__image"
+          src="assets/editorial/gallery-atmosphere.webp"
+          alt="Кракен в штормовом море"
+        />
+        <figcaption>ВИЗУАЛЬНЫЙ АРХИВ / МОРСКИЕ ОБРАЗЫ</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -134,6 +147,9 @@
             "
             [class.gallery-item--tall]="
               index % 5 === 2
+            "
+            [class.gallery-item--contain]="
+              image.thumbnail.toLowerCase().endsWith('.png')
             "
             type="button"
             (click)="openLightbox(image)"

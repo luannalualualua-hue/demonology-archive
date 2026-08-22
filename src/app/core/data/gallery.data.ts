@@ -10,13 +10,13 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     region: 'Восточная Европа',
     category: 'Лесные духи',
     image:
-      'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1800&q=90',
+      'assets/creatures/baba-yaga-main.jpg',
     thumbnail:
-      'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=80',
+      'assets/creatures/baba-yaga-main.jpg',
     description:
       'Образ леса как пограничного пространства, в котором перестают действовать привычные человеческие правила.',
     archiveNumber: 'IMG–001',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 2,
@@ -27,13 +27,13 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     region: 'Восточная Европа',
     category: 'Лесные духи',
     image:
-      'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1800&q=90',
+      'assets/creatures/leshy-main.jpg',
     thumbnail:
-      'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=80',
+      'assets/creatures/leshy-main.jpg',
     description:
       'Лес превращается в живое пространство, способное изменять дорогу, расстояние и направление движения.',
     archiveNumber: 'IMG–002',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 3,
@@ -44,13 +44,13 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     region: 'Восточная Европа',
     category: 'Водные духи',
         image:
-      'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1800&q=90',
+      'assets/creatures/rusalka-main.jpg',
     thumbnail:
-      'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=80',
+      'assets/creatures/rusalka-main.jpg',
     description:
       'Вода скрывает глубину и превращает знакомый человеческий силуэт в опасный и недостижимый образ.',
     archiveNumber: 'IMG–003',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 4,
@@ -61,13 +61,13 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     region: 'Ирландия',
     category: 'Призраки',
     image:
-      'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=90',
+      'assets/creatures/banshee-main.jpg',
     thumbnail:
-      'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=80',
+      'assets/creatures/banshee-main.jpg',
     description:
       'Женская фигура возникает в тумане не как причина смерти, а как голос неизбежного события.',
     archiveNumber: 'IMG–004',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 5,
@@ -78,13 +78,13 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     region: 'Ирландия',
     category: 'Предвестники смерти',
     image:
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1800&q=90',
+      'assets/creatures/dullahan-main.png',
     thumbnail:
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80',
+      'assets/creatures/dullahan-main.png',
     description:
       'Пустая дорога становится маршрутом сверхъестественного преследователя, которого невозможно остановить.',
     archiveNumber: 'IMG–005',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 6,
@@ -95,13 +95,13 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     region: 'Япония',
     category: 'Ёкаи',
     image:
-      'https://images.unsplash.com/photo-1483347756197-71ef80e95f73?auto=format&fit=crop&w=1800&q=90',
+      'assets/creatures/yuki-onna-main.png',
     thumbnail:
-      'https://images.unsplash.com/photo-1483347756197-71ef80e95f73?auto=format&fit=crop&w=900&q=80',
+      'assets/creatures/yuki-onna-main.png',
     description:
       'Зимняя стихия приобретает человеческую форму, сохраняя холод, безмолвие и эмоциональную недоступность.',
     archiveNumber: 'IMG–006',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 7,
@@ -112,13 +112,13 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     region: 'Япония',
     category: 'Демоны',
     image:
-      'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1800&q=90',
+      'assets/creatures/oni-main.png',
     thumbnail:
-      'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=900&q=80',
+      'assets/creatures/oni-main.png',
     description:
       'Демонический образ физической силы, ярости и наказания, выходящего за пределы человеческого контроля.',
     archiveNumber: 'IMG–007',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 8,
@@ -129,13 +129,13 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     region: 'Мексика',
     category: 'Призраки',
     image:
-      'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1800&q=90',
+      'assets/creatures/la-llorona-main.jpg',
     thumbnail:
-      'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=900&q=80',
+      'assets/creatures/la-llorona-main.jpg',
     description:
       'Фигура у воды объединяет материнскую вину, потерю и невозможность вернуть прошлое.',
     archiveNumber: 'IMG–008',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 9,
@@ -146,17 +146,17 @@ export const GALLERY_IMAGES: GalleryImage[] = [
     region: 'Восточная Европа',
     category: 'Лесные духи',
 
-image:
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=90',
+    image:
+      'assets/creatures/leshy-2.jpg',
     thumbnail:
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80',
+      'assets/creatures/leshy-2.jpg',
 
 
 
     description:
       'Повторяющийся лесной пейзаж разрушает чувство направления и заставляет человека сомневаться в собственной памяти.',
     archiveNumber: 'IMG–009',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 10,
@@ -167,13 +167,13 @@ image:
     region: 'Ирландия',
     category: 'Призраки',
     image:
-      'https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?auto=format&fit=crop&w=1800&q=90',
+      'assets/creatures/banshee-2.jpg',
     thumbnail:
-      'https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?auto=format&fit=crop&w=900&q=80',
+      'assets/creatures/banshee-2.jpg',
     description:
       'Неясный силуэт оставляет зрителю недостаточно информации, чтобы отличить человека от сверхъестественного существа.',
     archiveNumber: 'IMG–010',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 11,
@@ -184,13 +184,13 @@ image:
     region: 'Япония',
     category: 'Ёкаи',
     image:
-      'https://images.unsplash.com/photo-1486911278844-a81c5267e227?auto=format&fit=crop&w=1800&q=90',
+      'assets/editorial/about-mountains.webp',
     thumbnail:
-      'https://images.unsplash.com/photo-1486911278844-a81c5267e227?auto=format&fit=crop&w=900&q=80',
+      'assets/editorial/about-mountains.webp',
     description:
       'Горный ландшафт подчёркивает физическую уязвимость человека перед холодом и отсутствием укрытия.',
     archiveNumber: 'IMG–011',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
   {
     id: 12,
@@ -201,12 +201,12 @@ image:
     region: 'Восточная Европа',
     category: 'Водные духи',
     image:
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=90',
+      'assets/editorial/water-border.webp',
     thumbnail:
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80',
+      'assets/editorial/water-border.webp',
     description:
       'Спокойная поверхность воды скрывает пространство, недоступное человеческому зрению и контролю.',
     archiveNumber: 'IMG–012',
-    source: 'Временная демонстрационная иллюстрация',
+    source: 'Иллюстрация из визуального архива проекта',
   },
 ];

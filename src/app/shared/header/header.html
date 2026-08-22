@@ -16,9 +16,10 @@
     <button
       class="menu-button"
       type="button"
+      aria-controls="main-navigation"
       [class.menu-button--active]="menuOpen()"
       [attr.aria-expanded]="menuOpen()"
-      aria-label="Открыть меню"
+      [attr.aria-label]="menuOpen() ? 'Закрыть меню' : 'Открыть меню'"
       (click)="toggleMenu()"
     >
       <span></span>
@@ -26,15 +27,22 @@
     </button>
 
     <nav
+      id="main-navigation"
       class="navigation"
       [class.navigation--open]="menuOpen()"
       aria-label="Главная навигация"
     >
+      <div class="navigation__mobile-label">
+        <span>АРХИВНАЯ НАВИГАЦИЯ</span>
+        <strong>Разделы проекта</strong>
+      </div>
+
       <a
         routerLink="/encyclopedia"
         routerLinkActive="navigation__link--active"
         (click)="closeMenu()"
       >
+        <span>01</span>
         Энциклопедия
       </a>
 
@@ -43,6 +51,7 @@
         routerLinkActive="navigation__link--active"
         (click)="closeMenu()"
       >
+        <span>02</span>
         Галерея
       </a>
 
@@ -51,6 +60,7 @@
         routerLinkActive="navigation__link--active"
         (click)="closeMenu()"
       >
+        <span>03</span>
         Словарь
       </a>
 
@@ -59,6 +69,7 @@
         routerLinkActive="navigation__link--active"
         (click)="closeMenu()"
       >
+        <span>04</span>
         Исследования
       </a>
 
@@ -67,8 +78,30 @@
         routerLinkActive="navigation__link--active"
         (click)="closeMenu()"
       >
+        <span>05</span>
         О проекте
       </a>
+
+      <div class="navigation__mobile-footer">
+        МИФОЛОГИЯ / ФОЛЬКЛОР / ВИЗУАЛЬНАЯ КУЛЬТУРА
+      </div>
     </nav>
+
+    <button
+      class="navigation-backdrop"
+      type="button"
+      [class.navigation-backdrop--visible]="menuOpen()"
+      [attr.aria-hidden]="!menuOpen()"
+      tabindex="-1"
+      aria-label="Закрыть меню"
+      (click)="closeMenu()"
+    ></button>
+
+    <img
+      class="header__sigil"
+      src="assets/decor/sigil.svg"
+      alt=""
+      aria-hidden="true"
+    />
   </div>
 </header>

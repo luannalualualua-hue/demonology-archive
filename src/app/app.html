@@ -1,9 +1,31 @@
 <div class="site-shell">
+  <div
+    class="scroll-progress"
+    aria-hidden="true"
+    [style.transform]="'scaleX(' + scrollProgress() + ')'"
+  ></div>
+
+  <div class="cursor-aura" aria-hidden="true"></div>
+
   <app-header />
 
-  <main class="site-content">
+  <main
+    class="site-content"
+    [class.site-content--changing]="routeChanging()"
+  >
     <router-outlet />
   </main>
+
+  <button
+    class="back-to-top"
+    type="button"
+    [class.back-to-top--visible]="showBackToTop()"
+    aria-label="Наверх"
+    (click)="scrollToTop()"
+  >
+    <span aria-hidden="true">↑</span>
+    <small>НАВЕРХ</small>
+  </button>
 
   <app-footer />
 </div>

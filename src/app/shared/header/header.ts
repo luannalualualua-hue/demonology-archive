@@ -1,4 +1,11 @@
-import { Component, HostListener, signal } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnDestroy,
+  inject,
+  signal,
+} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -8,21 +15,37 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header {
+export class Header implements OnDestroy {
+  private readonly document = inject(DOCUMENT);
+
   readonly menuOpen = signal(false);
 
   toggleMenu(): void {
-    this.menuOpen.update((value) => !value);
+    this.setMenuState(!this.menuOpen());
   }
 
   closeMenu(): void {
-    this.menuOpen.set(false);
+    this.setMenuState(false);
+  }
+
+  ngOnDestroy(): void {
+    this.document.body.classList.remove('mobile-menu-open');
   }
 
   @HostListener('window:resize')
   onWindowResize(): void {
     if (window.innerWidth > 900) {
-      this.menuOpen.set(false);
+      this.closeMenu();
     }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.closeMenu();
+  }
+
+  private setMenuState(open: boolean): void {
+    this.menuOpen.set(open);
+    this.document.body.classList.toggle('mobile-menu-open', open);
   }
 }

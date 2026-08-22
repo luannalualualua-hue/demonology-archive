@@ -536,3 +536,359 @@
     font-size: 25px;
   }
 }
+/* ============================================================
+   Illustrated glossary / occult codex
+   ============================================================ */
+.glossary-hero {
+  position: relative;
+  min-height: 520px;
+  background: #050607;
+}
+
+.glossary-hero__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 78% center;
+  filter: saturate(0.7) contrast(1.12) brightness(0.68);
+}
+
+.glossary-hero::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(4, 5, 6, 0.99) 0%, rgba(4, 5, 6, 0.94) 42%, rgba(4, 5, 6, 0.34) 76%, rgba(4, 5, 6, 0.13) 100%),
+    linear-gradient(0deg, rgba(4, 5, 6, 0.92), transparent 58%);
+  content: '';
+}
+
+.glossary-hero__inner {
+  position: relative;
+  z-index: 2;
+}
+
+.glossary-section {
+  position: relative;
+  background: #060708;
+}
+
+.glossary-toolbar,
+.alphabet-navigation,
+.glossary-list {
+  position: relative;
+  z-index: 1;
+}
+
+.term-card {
+  position: relative;
+  min-height: 210px;
+  overflow: hidden;
+  background: rgba(7, 8, 9, 0.55);
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 330px;
+    background: linear-gradient(90deg, rgba(7, 8, 9, 1), rgba(7, 8, 9, 0.22));
+    content: '';
+    pointer-events: none;
+  }
+}
+
+.term-card__header,
+.term-card__content {
+  position: relative;
+  z-index: 2;
+}
+
+.term-card__header {
+  min-height: 210px;
+  padding: 34px 285px 34px 0;
+}
+
+.term-card__content {
+  padding-right: 285px;
+}
+
+.term-card__symbol {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  z-index: 3;
+  background: rgba(6, 7, 8, 0.74);
+  transform: translateY(-50%);
+  backdrop-filter: blur(8px);
+}
+
+.term-card--open .term-card__symbol {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.term-card__illustration {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 250px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.8;
+  filter: saturate(0.7) contrast(1.15) brightness(0.72);
+  transition: opacity 220ms ease, transform 450ms ease;
+}
+
+.term-card:hover .term-card__illustration,
+.term-card--open .term-card__illustration {
+  opacity: 1;
+  transform: scale(1.035);
+}
+
+.glossary-section__raven {
+  position: absolute;
+  top: 230px;
+  left: -45px;
+  width: 330px;
+  height: 300px;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+@media (max-width: 1150px) {
+  .glossary-section__raven {
+    display: none;
+  }
+}
+
+@media (max-width: 1050px) {
+  .glossary-hero__image {
+    object-position: 68% center;
+  }
+
+  .term-card::after {
+    width: 260px;
+  }
+
+  .term-card__header {
+    padding-right: 220px;
+  }
+
+  .term-card__content {
+    padding-right: 220px;
+  }
+}
+
+@media (max-width: 760px) {
+  .glossary-hero {
+    min-height: 470px;
+    padding-top: 135px;
+  }
+
+  .glossary-hero__image {
+    object-position: 62% center;
+  }
+
+  .glossary-hero__content {
+    grid-template-columns: 1fr;
+  }
+
+  .term-card__illustration,
+  .term-card::after {
+    display: none;
+  }
+
+  .term-card {
+    min-height: auto;
+  }
+
+  .term-card__header {
+    min-height: auto;
+    padding: 28px 58px 28px 0;
+  }
+
+  .term-card__content {
+    padding-right: 0;
+  }
+
+  .term-card__symbol {
+    top: 28px;
+    right: 0;
+    transform: none;
+  }
+
+  .term-card--open .term-card__symbol {
+    transform: rotate(45deg);
+  }
+}
+
+.glossary-section__sigil {
+  position: absolute;
+  top: 120px;
+  right: 26px;
+  width: 210px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+@media (max-width: 1150px) {
+  .glossary-section__sigil {
+    width: 150px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 760px) {
+  .glossary-section__sigil {
+    display: none;
+  }
+}
+
+/* Visual index between the hero and the dictionary */
+.glossary-visual-index {
+  position: relative;
+  padding: 26px 0 34px;
+  border-bottom: 1px solid var(--color-border);
+  background: #070809;
+}
+
+.glossary-visual-index::before {
+  position: absolute;
+  inset: 0;
+  background: url('../../../assets/editorial/archive-texture.webp') center / cover no-repeat;
+  opacity: 0.045;
+  content: '';
+  pointer-events: none;
+}
+
+.glossary-visual-index__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.35fr 0.8fr 0.8fr;
+  gap: 14px;
+}
+
+.glossary-visual-card {
+  position: relative;
+  min-height: 230px;
+  overflow: hidden;
+  border: 1px solid rgba(163, 111, 75, 0.18);
+  background: #08090a;
+}
+
+.glossary-visual-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.72) contrast(1.08) brightness(0.62);
+  transition: transform 450ms ease, filter 300ms ease;
+}
+
+.glossary-visual-card::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6, 7, 8, 0.96), rgba(6, 7, 8, 0.12) 64%);
+  content: '';
+}
+
+.glossary-visual-card > div {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  display: grid;
+  gap: 7px;
+}
+
+.glossary-visual-card span {
+  color: var(--color-accent-light);
+  font-family: var(--font-sans);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.glossary-visual-card strong {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 0.94;
+}
+
+.glossary-visual-card:hover img {
+  filter: saturate(0.95) contrast(1.1) brightness(0.72);
+  transform: scale(1.03);
+}
+
+@media (max-width: 900px) {
+  .glossary-visual-index__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .glossary-visual-card--wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 620px) {
+  .glossary-visual-index__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .glossary-visual-card--wide {
+    grid-column: auto;
+  }
+
+  .glossary-visual-card {
+    min-height: 210px;
+  }
+}
+
+.glossary-hero__corner,
+.glossary-hero__compass {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.glossary-hero__corner {
+  left: 16px;
+  bottom: 16px;
+  width: 140px;
+  opacity: 0.24;
+}
+
+.glossary-hero__compass {
+  top: 112px;
+  right: 30px;
+  width: 140px;
+  opacity: 0.18;
+}
+
+@media (max-width: 760px) {
+  .glossary-hero__corner,
+  .glossary-hero__compass {
+    display: none;
+  }
+}
+
+/* V6 — context-aware glossary illustrations */
+.term-card__illustration--contain {
+  padding: 22px;
+  object-fit: contain;
+  object-position: center;
+  background:
+    radial-gradient(circle at center, rgba(125, 38, 38, 0.12), transparent 58%),
+    #08090a;
+}
+
+.term-card__illustration[src$='sigil.svg'] {
+  opacity: 0.52;
+  filter: sepia(0.35) saturate(0.75) brightness(0.92);
+}

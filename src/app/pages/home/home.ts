@@ -25,7 +25,7 @@ export class Home {
       culture: 'Кельтская традиция',
       fear: 'Неизбежность утраты',
       slug: 'banshee',
-      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23',
+      image: 'assets/creatures/banshee-main.jpg',
     },
     {
       archiveNumber: '011',
@@ -33,7 +33,7 @@ export class Home {
       culture: 'Японский фольклор',
       fear: 'Холод и одиночество',
       slug: 'yuki-onna',
-      image: 'https://images.unsplash.com/photo-1511497584788-876760111969',
+      image: 'assets/creatures/yuki-onna-main.png',
     },
     {
       archiveNumber: '019',
@@ -41,7 +41,7 @@ export class Home {
       culture: 'Латинская Америка',
       fear: 'Вина и потеря',
       slug: 'la-llorona',
-      image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
+      image: 'assets/creatures/la-llorona-main.jpg',
     },
   ];
 

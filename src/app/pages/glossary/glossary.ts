@@ -7,7 +7,10 @@ import {
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
-import { GlossaryCategory } from '../../core/models/glossary-term.model';
+import {
+  GlossaryCategory,
+  GlossaryTerm,
+} from '../../core/models/glossary-term.model';
 import { GlossaryService } from '../../core/services/glossary.service';
 
 @Component({
@@ -109,6 +112,38 @@ export class Glossary {
     this.selectedLetter.set('');
     this.selectedCategory.set('');
     this.openedTermId.set(null);
+  }
+
+  getTermIllustration(term: GlossaryTerm): string {
+    const illustrations: Record<number, string> = {
+      1: 'assets/decor/sigil.svg',
+      2: 'assets/editorial/archive-guide.webp',
+      3: 'assets/editorial/glossary-codex-collage.webp',
+      4: 'assets/creatures/baba-yaga-main.jpg',
+      5: 'assets/creatures/oni-main.png',
+      6: 'assets/creatures/leshy-main.jpg',
+      7: 'assets/creatures/yuki-onna-main.png',
+      8: 'assets/editorial/about-method-collage.webp',
+      9: 'assets/editorial/forest-remember.webp',
+      10: 'assets/editorial/about-grimoire.webp',
+      11: 'assets/creatures/puca-main.png',
+      12: 'assets/creatures/djinn-main.png',
+      13: 'assets/creatures/banshee-main.jpg',
+      14: 'assets/creatures/la-llorona-main.jpg',
+      15: 'assets/editorial/glossary-witch.webp',
+      16: 'assets/editorial/glossary-nature.webp',
+      17: 'assets/creatures/upyr-main.png',
+      18: 'assets/creatures/draugr-main.png',
+      19: 'assets/editorial/water-border.webp',
+      20: 'assets/creatures/ifrit-main.png',
+    };
+
+    return illustrations[term.id] ?? 'assets/editorial/glossary-demon.webp';
+  }
+
+
+  isContainedIllustration(term: GlossaryTerm): boolean {
+    return term.id === 1 || term.id === 3 || term.id === 8 || term.id === 10;
   }
 
   private normalize(value: string): string {

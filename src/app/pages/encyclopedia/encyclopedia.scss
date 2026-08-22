@@ -398,3 +398,204 @@
     grid-template-columns: 1fr;
   }
 }
+/* ============================================================
+   Illustrated codex presentation
+   ============================================================ */
+.page-hero {
+  position: relative;
+  min-height: 530px;
+  overflow: hidden;
+  background: #050607;
+}
+
+.page-hero__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 78% center;
+  filter: saturate(0.72) contrast(1.12) brightness(0.68);
+}
+
+.page-hero::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(4, 5, 6, 0.98) 0%, rgba(4, 5, 6, 0.9) 42%, rgba(4, 5, 6, 0.32) 76%, rgba(4, 5, 6, 0.16) 100%),
+    linear-gradient(0deg, rgba(4, 5, 6, 0.92), transparent 58%);
+  content: '';
+}
+
+.page-hero__inner {
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero__content {
+  grid-template-columns: minmax(0, 0.9fr) minmax(270px, 380px);
+}
+
+.catalog {
+  background: #060708;
+}
+
+.filters {
+  padding: 24px;
+  border: 1px solid rgba(163, 111, 75, 0.25);
+  background: rgba(7, 8, 9, 0.88);
+  box-shadow: inset 0 0 45px rgba(131, 24, 19, 0.04);
+
+}
+
+.creatures-grid {
+  gap: 34px 18px;
+}
+
+:host ::ng-deep app-creature-card .card {
+  border: 1px solid rgba(165, 112, 76, 0.22);
+  background: rgba(8, 9, 10, 0.86);
+  box-shadow: 0 24px 65px rgba(0, 0, 0, 0.28);
+}
+
+:host ::ng-deep app-creature-card .card__image img {
+  filter: saturate(0.72) contrast(1.1) brightness(0.76) !important;
+}
+
+:host ::ng-deep app-creature-card .card:hover .creature-card__image img {
+  filter: saturate(0.95) contrast(1.12) brightness(0.82) !important;
+}
+
+.encyclopedia-sections {
+  display: grid;
+  margin-top: 70px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid rgba(163, 111, 75, 0.27);
+  background: rgba(8, 9, 10, 0.82);
+
+  a {
+    display: grid;
+    min-height: 128px;
+    padding: 22px;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px 18px;
+    border-right: 1px solid rgba(163, 111, 75, 0.23);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background 180ms ease;
+
+    &:last-child {
+      border-right: 0;
+    }
+
+    &:hover {
+      background: rgba(139, 25, 20, 0.14);
+    }
+  }
+
+  span {
+    grid-row: 1 / 3;
+    color: #a42a23;
+    font-family: var(--font-display);
+    font-size: 38px;
+  }
+
+  strong {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.08;
+  }
+
+  small {
+    color: #bd4438;
+    font-family: var(--font-sans);
+    font-size: 8px;
+    letter-spacing: 0.16em;
+  }
+}
+
+@media (max-width: 1050px) {
+  .page-hero__image {
+    object-position: 66% center;
+  }
+
+  .encyclopedia-sections {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    a:nth-child(2) {
+      border-right: 0;
+    }
+
+    a:nth-child(-n + 2) {
+      border-bottom: 1px solid rgba(163, 111, 75, 0.23);
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .page-hero {
+    min-height: 470px;
+    padding-top: 135px;
+  }
+
+  .page-hero__image {
+    object-position: 58% center;
+  }
+
+  .page-hero__content {
+    grid-template-columns: 1fr;
+  }
+
+  .filters__illustration {
+    display: none;
+  }
+
+  .encyclopedia-sections {
+    grid-template-columns: 1fr 1fr;
+
+    a {
+      min-height: 120px;
+      padding: 16px;
+    }
+
+    span {
+      font-size: 30px;
+    }
+
+    strong {
+      font-size: 16px;
+    }
+  }
+}
+
+.filters__illustration {
+  display: block;
+  width: 100%;
+  height: 190px;
+  margin-top: 35px;
+  object-fit: cover;
+  object-position: center 24%;
+  opacity: 0.65;
+  filter: saturate(0.65) contrast(1.1) brightness(0.68);
+}
+
+/* ============================================================
+   Compact bestiary grid
+   ============================================================ */
+.creatures-grid {
+  align-items: stretch;
+  gap: 26px 18px;
+}
+
+.catalog__layout {
+  gap: clamp(34px, 5vw, 72px);
+}
+
+@media (max-width: 1200px) {
+  .creatures-grid {
+    gap: 22px 16px;
+  }
+}

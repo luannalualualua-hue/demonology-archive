@@ -208,6 +208,29 @@
             </figcaption>
           </figure>
 
+          <section class="visual-dossier">
+            <header class="visual-dossier__header">
+              <div>
+                <span class="article-section__label">ВИЗУАЛЬНОЕ ДОСЬЕ</span>
+                <h2>Образ в материалах архива</h2>
+              </div>
+
+              <p>
+                Дополнительные визуальные фрагменты помогают увидеть среду,
+                символический контекст и атмосферу, в которой существует образ.
+              </p>
+            </header>
+
+            <div class="visual-dossier__grid">
+              @for (visual of visualGallery(); track visual.src) {
+                <figure class="visual-card">
+                  <img [src]="visual.src" [alt]="visual.alt" loading="lazy" />
+                  <figcaption>{{ visual.caption }}</figcaption>
+                </figure>
+              }
+            </div>
+          </section>
+
           <section
             id="origin"
             class="article-section"
@@ -329,6 +352,32 @@
               </div>
             </dl>
           </section>
+
+          @if (relatedArchive().length > 0) {
+            <section class="related-archive">
+              <header class="related-archive__header">
+                <div>
+                  <span class="article-section__label">СВЯЗАННЫЕ МАТЕРИАЛЫ</span>
+                  <h2>Продолжить исследование</h2>
+                </div>
+
+                <p>Материалы из той же культурной зоны или с близким образом страха.</p>
+              </header>
+
+              <div class="related-archive__grid">
+                @for (related of relatedArchive(); track related.slug) {
+                  <a class="related-card" [routerLink]="['/encyclopedia', related.slug]">
+                    <img [src]="related.mainImage" [alt]="related.name" loading="lazy" />
+                    <div>
+                      <span>{{ related.culture }}</span>
+                      <strong>{{ related.name }}</strong>
+                      <p>{{ related.shortDescription }}</p>
+                    </div>
+                  </a>
+                }
+              </div>
+            </section>
+          }
         </div>
       </div>
     </section>

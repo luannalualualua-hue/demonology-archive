@@ -1,6 +1,11 @@
 <section class="hero">
-  <div class="hero__background" aria-hidden="true"></div>
+  <div class="hero__background" aria-hidden="true">
+    <img src="assets/editorial/home-castle.webp" alt="" />
+  </div>
   <div class="hero__noise" aria-hidden="true"></div>
+  <img class="hero__compass" src="assets/decor/compass.svg" alt="" aria-hidden="true" />
+  <img class="hero__corner hero__corner--top" src="assets/decor/corner-ornament.svg" alt="" aria-hidden="true" />
+  <img class="hero__corner hero__corner--bottom" src="assets/decor/corner-ornament.svg" alt="" aria-hidden="true" />
 
   <div class="container hero__content">
     <div class="hero__meta">
@@ -8,29 +13,119 @@
       <span>КОЛЛЕКЦИЯ 001–024</span>
     </div>
 
-    <div class="hero__main">
-      <p class="hero__eyebrow">
-        Образовательная энциклопедия
-      </p>
-
-      <h1>
-        Образы страха
-        <em>в культурах мира</em>
-      </h1>
-
-      <div class="hero__description">
-        <p>
-          Исследование мифологических существ как отражений
-          человеческих страхов, культурной памяти и коллективного
-          воображения.
+    <div class="hero__layout">
+      <div class="hero__left">
+        <p class="hero__eyebrow">
+          Образовательная энциклопедия
         </p>
 
-        <a class="button button--primary" routerLink="/encyclopedia">
-          <span>Открыть архив</span>
-          <span aria-hidden="true">↗</span>
-        </a>
+        <div class="hero__index-mark">001</div>
+
+        <h1>
+          <span>Образы</span>
+          <strong>страха</strong>
+          <em>в культурах мира</em>
+        </h1>
+
+        <div class="hero__description">
+          <p>
+            Исследование мифологических существ как отражений
+            человеческих страхов, культурной памяти и коллективного
+            воображения.
+          </p>
+
+          <a class="button button--primary" routerLink="/encyclopedia">
+            <span>Открыть архив</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <nav class="hero-archive-grid" aria-label="Разделы архива">
+          <a class="hero-archive-grid__item hero-archive-grid__item--myth" routerLink="/encyclopedia">
+            <img class="hero-archive-grid__image" src="assets/creatures/baba-yaga-main.jpg" alt="" aria-hidden="true" />
+            <span class="hero-archive-grid__icon">◎</span>
+            <strong>Мифология<br />народов мира</strong>
+            <small>01</small>
+          </a>
+
+          <a class="hero-archive-grid__item hero-archive-grid__item--folklore" routerLink="/encyclopedia">
+            <img class="hero-archive-grid__image" src="assets/creatures/dullahan-main.png" alt="" aria-hidden="true" />
+            <span class="hero-archive-grid__icon">♜</span>
+            <strong>Фольклор<br />и легенды</strong>
+            <small>02</small>
+          </a>
+
+          <a class="hero-archive-grid__item hero-archive-grid__item--visual" routerLink="/gallery">
+            <img class="hero-archive-grid__image" src="assets/creatures/yuki-onna-main.png" alt="" aria-hidden="true" />
+            <span class="hero-archive-grid__icon">▣</span>
+            <strong>Визуальная<br />культура</strong>
+            <small>03</small>
+          </a>
+
+          <a class="hero-archive-grid__item hero-archive-grid__item--modern" routerLink="/blog">
+            <img class="hero-archive-grid__image" src="assets/creatures/ifrit-main.png" alt="" aria-hidden="true" />
+            <span class="hero-archive-grid__icon">◉</span>
+            <strong>Современные<br />интерпретации</strong>
+            <small>04</small>
+          </a>
+        </nav>
       </div>
+
+      <aside class="hero__aside">
+        <a class="hero-guide" routerLink="/encyclopedia/dullahan">
+          <div class="hero-guide__image">
+            <img
+              src="assets/editorial/archive-guide.webp"
+              alt="Дуллахан — путеводитель по архиву"
+            />
+          </div>
+
+          <div class="hero-guide__content">
+            <span>КОЛЛЕКЦИЯ 001–024</span>
+            <strong>Путеводитель<br />по архиву</strong>
+            <i aria-hidden="true">↗</i>
+          </div>
+        </a>
+
+        <div class="hero-mini-grid">
+          <a class="hero-mini-card" routerLink="/glossary">
+            <img src="assets/editorial/glossary-grimoire.webp" alt="" aria-hidden="true" />
+            <span>ТЕРМИНЫ И ОПРЕДЕЛЕНИЯ</span>
+            <strong>Словарь</strong>
+          </a>
+
+          <a class="hero-mini-card" routerLink="/blog">
+            <img src="assets/editorial/about-grimoire.webp" alt="" aria-hidden="true" />
+            <span>АНАЛИТИЧЕСКИЕ МАТЕРИАЛЫ</span>
+            <strong>Исследования</strong>
+          </a>
+        </div>
+      </aside>
     </div>
+
+    <div class="hero-research-strip">
+      <span class="hero-research-strip__title">ИССЛЕДОВАНИЯ</span>
+
+      <a routerLink="/blog/why-cultures-create-similar-monsters">
+        <small>01</small>
+        <strong>Бестиарий средневековья</strong>
+        <img src="assets/editorial/forest-remember.webp" alt="" />
+      </a>
+
+      <a routerLink="/blog/female-images-of-fear">
+        <small>02</small>
+        <strong>Женские образы в мифах</strong>
+        <img src="assets/editorial/women-fear.webp" alt="" />
+      </a>
+
+      <a routerLink="/blog/from-legend-to-video-game">
+        <small>03</small>
+        <strong>Духи природы и места силы</strong>
+        <img src="assets/editorial/game-design.webp" alt="" />
+      </a>
+    </div>
+
+    <img class="hero__divider" src="assets/decor/divider-ritual.svg" alt="" aria-hidden="true" />
 
     <div class="hero__footer">
       <span>Архивные материалы</span>
@@ -40,6 +135,8 @@
 </section>
 
 <section class="manifesto section">
+  <img class="manifesto__quill" src="assets/decor/quill.svg" alt="" aria-hidden="true" />
+  <img class="manifesto__rune" src="assets/decor/rune-panel.svg" alt="" aria-hidden="true" />
   <div class="container manifesto__grid">
     <div class="section-index">
       <span>РАЗДЕЛ 01</span>
@@ -66,6 +163,19 @@
           гейм-дизайнеров.
         </p>
       </div>
+
+      <figure class="manifesto__visual">
+        <img
+          src="assets/editorial/home-archive-collage.webp"
+          alt="Коллаж материалов цифрового архива"
+          loading="lazy"
+        />
+
+        <figcaption>
+          <span>АРХИВНЫЙ МЕТОД</span>
+          <strong>От легенды — к визуальному коду</strong>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -118,7 +228,7 @@
 
           <div class="creature-card__fear">
             <span>ОБРАЗ СТРАХА</span>
-            <strong>{{ creature.fear[0] }}</strong>
+            <strong>{{ creature.fear }}</strong>
           </div>
         </a>
       }
@@ -127,6 +237,13 @@
 </section>
 
 <section class="fears section">
+  <img
+    class="fears__illustration"
+    src="assets/editorial/forest-remember.webp"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+  />
   <div class="container fears__grid">
     <header class="fears__header">
       <span class="section-kicker">КЛАССИФИКАЦИЯ</span>
@@ -159,6 +276,7 @@
 </section>
 
 <section class="quote-section section">
+  <img class="quote-section__divider" src="assets/decor/divider-ritual.svg" alt="" aria-hidden="true" />
   <div class="container quote-section__inner">
     <span class="section-kicker">ПОЛЕВАЯ ЗАПИСЬ / 00</span>
 

@@ -80,6 +80,23 @@
             {{ item.introduction }}
           </p>
 
+          <section class="article-visual-dossier" aria-label="Визуальное досье исследования">
+            <figure class="article-visual-dossier__main">
+              <img [src]="item.coverImage" [alt]="item.title" loading="lazy" />
+              <figcaption>{{ item.archiveNumber }} / {{ item.category }}</figcaption>
+            </figure>
+
+            <figure>
+              <img src="assets/editorial/archive-guide.webp" alt="Архивный визуальный материал" loading="lazy" />
+              <figcaption>АРХИВ / СРАВНИТЕЛЬНЫЙ МАТЕРИАЛ</figcaption>
+            </figure>
+
+            <figure>
+              <img src="assets/editorial/glossary-grimoire.webp" alt="Гримуар и рукописи" loading="lazy" />
+              <figcaption>ИСТОЧНИКИ / ПОЛЕВЫЕ ЗАПИСИ</figcaption>
+            </figure>
+          </section>
+
           @for (section of item.sections; track section.id) {
             <section
               class="research-section"

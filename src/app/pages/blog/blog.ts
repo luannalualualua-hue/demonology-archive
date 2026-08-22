@@ -40,8 +40,12 @@ export class Blog {
     return this.filteredArticles()[0];
   });
 
+  readonly secondaryArticles = computed(() => {
+    return this.filteredArticles().slice(1, 4);
+  });
+
   readonly remainingArticles = computed(() => {
-    return this.filteredArticles().slice(1);
+    return this.filteredArticles().slice(4);
   });
 
   selectCategory(category: ArticleCategory | ''): void {

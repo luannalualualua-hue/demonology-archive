@@ -85,3 +85,24 @@
     justify-content: center;
   }
 }
+.footer__top {
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) 170px auto;
+}
+
+.footer__sigil {
+  width: 150px;
+  height: 150px;
+  align-self: center;
+  opacity: 0.22;
+}
+
+@media (max-width: 900px) {
+  .footer__top {
+    grid-template-columns: 1fr auto;
+  }
+
+  .footer__sigil {
+    display: none;
+  }
+}

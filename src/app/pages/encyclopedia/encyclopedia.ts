@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { CreaturesService } from '../../core/services/creatures.service';
 import { CreatureCard } from '../../shared/components/creature-card/creature-card';
@@ -7,7 +8,7 @@ import { CreatureCard } from '../../shared/components/creature-card/creature-car
 @Component({
   selector: 'app-encyclopedia',
   standalone: true,
-  imports: [FormsModule, CreatureCard],
+  imports: [FormsModule, RouterLink, CreatureCard],
   templateUrl: './encyclopedia.html',
   styleUrl: './encyclopedia.scss',
 })
