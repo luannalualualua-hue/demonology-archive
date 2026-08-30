@@ -15,6 +15,26 @@
         <span>{{ counter() }}</span>
       </div>
 
+      <div class="lightbox__tools">
+        <button
+          type="button"
+          [class.is-active]="zoomed()"
+          (click)="toggleZoom()"
+        >
+          <span aria-hidden="true">⌕</span>
+          Масштаб
+        </button>
+
+        <button
+          type="button"
+          [class.is-active]="detailsVisible()"
+          (click)="toggleDetails()"
+        >
+          <span aria-hidden="true">ⓘ</span>
+          Досье
+        </button>
+      </div>
+
       <button
         class="lightbox__close"
         type="button"
@@ -28,7 +48,10 @@
 
     <div
       class="lightbox__content"
+      [class.lightbox__content--details-hidden]="!detailsVisible()"
       (click)="preventClose($event)"
+      (pointerdown)="onPointerDown($event)"
+      (pointerup)="onPointerUp($event)"
     >
       <button
         class="lightbox__navigation lightbox__navigation--previous"
@@ -40,64 +63,74 @@
       </button>
 
       <figure class="lightbox__figure">
-        <div class="lightbox__image">
+        <div
+          class="lightbox__image"
+          [class.lightbox__image--zoomed]="zoomed()"
+          (dblclick)="toggleZoom()"
+        >
           <img
             [src]="image.image"
             [alt]="image.title"
           />
+
+          <span class="lightbox__zoom-hint">
+            {{ zoomed() ? 'Двойной клик — уменьшить' : 'Двойной клик — увеличить' }}
+          </span>
         </div>
 
-        <figcaption>
-          <div class="lightbox__heading">
-            <span>{{ image.culture }}</span>
-            <h2>{{ image.title }}</h2>
-            <p>{{ image.creatureName }}</p>
-          </div>
+        @if (detailsVisible()) {
+          <figcaption>
+            <div class="lightbox__heading">
+              <span>{{ image.culture }}</span>
+              <h2>{{ image.title }}</h2>
+              <p>{{ image.creatureName }}</p>
+            </div>
 
-          <div class="lightbox__description">
-            <p>{{ image.description }}</p>
+            <div class="lightbox__description">
+              <p>{{ image.description }}</p>
 
-            <dl>
-              <div>
-                <dt>Категория</dt>
-                <dd>{{ image.category }}</dd>
-              </div>
-
-              <div>
-                <dt>Регион</dt>
-                <dd>{{ image.region }}</dd>
-              </div>
-
-              @if (image.author) {
+              <dl>
                 <div>
-                  <dt>Автор</dt>
-                  <dd>{{ image.author }}</dd>
+                  <dt>Категория</dt>
+                  <dd>{{ image.category }}</dd>
                 </div>
-              }
 
-              @if (image.year) {
                 <div>
-                  <dt>Год</dt>
-                  <dd>{{ image.year }}</dd>
+                  <dt>Регион</dt>
+                  <dd>{{ image.region }}</dd>
                 </div>
-              }
 
-              @if (image.source) {
-                <div>
-                  <dt>Источник</dt>
-                  <dd>{{ image.source }}</dd>
-                </div>
-              }
+                @if (image.author) {
+                  <div>
+                    <dt>Автор</dt>
+                    <dd>{{ image.author }}</dd>
+                  </div>
+                }
 
-              @if (image.license) {
-                <div>
-                  <dt>Лицензия</dt>
-                  <dd>{{ image.license }}</dd>
-                </div>
-              }
-            </dl>
-          </div>
-        </figcaption>
+                @if (image.year) {
+                  <div>
+                    <dt>Год</dt>
+                    <dd>{{ image.year }}</dd>
+                  </div>
+                }
+
+                @if (image.source) {
+                  <div>
+                    <dt>Источник</dt>
+                    <dd>{{ image.source }}</dd>
+                  </div>
+                }
+
+                @if (image.license) {
+                  <div>
+                    <dt>Лицензия</dt>
+                    <dd>{{ image.license }}</dd>
+                  </div>
+                }
+              </dl>
+            </div>
+          </figcaption>
+        }
       </figure>
 
       <button
@@ -110,12 +143,34 @@
       </button>
     </div>
 
+    <div
+      class="lightbox__filmstrip"
+      role="list"
+      aria-label="Миниатюры галереи"
+      (click)="preventClose($event)"
+    >
+      @for (thumbnail of images(); track thumbnail.id; let index = $index) {
+        <button
+          type="button"
+          role="listitem"
+          [class.is-active]="index === selectedIndex()"
+          [attr.aria-label]="'Открыть ' + thumbnail.title"
+          (click)="selectIndex(index)"
+        >
+          <img [src]="thumbnail.image" [alt]="thumbnail.title" loading="lazy" />
+          <span>{{ thumbnail.archiveNumber }}</span>
+        </button>
+      }
+    </div>
+
     <footer
       class="lightbox__footer"
       (click)="preventClose($event)"
     >
-      <span>← → Для навигации</span>
-      <span>ESC Для выхода</span>
+      <span>← → Навигация</span>
+      <span>Z Масштаб</span>
+      <span>I Досье</span>
+      <span>ESC Выход</span>
     </footer>
   </div>
 }

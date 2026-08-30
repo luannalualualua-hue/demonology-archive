@@ -24,10 +24,18 @@ export class ArticleDetails {
   private readonly destroyRef = inject(DestroyRef);
   private readonly titleService = inject(Title);
   private readonly articlesService = inject(ArticlesService);
+  private sectionObserver?: IntersectionObserver;
 
   readonly articles = this.articlesService.getAll();
   readonly article = signal<Article | undefined>(undefined);
   readonly loading = signal(true);
+  readonly activeSection = signal('');
+
+  readonly readingProgress = computed(() => {
+    const sections = this.article()?.sections ?? [];
+    const index = sections.findIndex((section) => section.id === this.activeSection());
+    return sections.length <= 1 || index <= 0 ? 0 : index / (sections.length - 1);
+  });
 
   readonly currentIndex = computed(() => {
     const currentArticle = this.article();
@@ -62,6 +70,8 @@ export class ArticleDetails {
   });
 
   constructor() {
+    this.destroyRef.onDestroy(() => this.sectionObserver?.disconnect());
+
     this.route.paramMap
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((params) => {
@@ -82,6 +92,50 @@ export class ArticleDetails {
         }
 
         window.scrollTo(0, 0);
+
+        window.setTimeout(() => this.initializeSectionObserver(), 60);
       });
+  }
+
+  scrollToSection(sectionId: string, event: Event): void {
+    event.preventDefault();
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
+  private initializeSectionObserver(): void {
+    this.sectionObserver?.disconnect();
+
+    const sections = (this.article()?.sections ?? [])
+      .map((section) => document.getElementById(section.id))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    if (!('IntersectionObserver' in window) || sections.length === 0) {
+      return;
+    }
+
+    if (!this.activeSection()) {
+      this.activeSection.set(sections[0].id);
+    }
+
+    this.sectionObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target.id) {
+          this.activeSection.set(visible.target.id);
+        }
+      },
+      {
+        rootMargin: '-24% 0px -58% 0px',
+        threshold: [0.05, 0.2, 0.45],
+      },
+    );
+
+    sections.forEach((section) => this.sectionObserver?.observe(section));
   }
 }

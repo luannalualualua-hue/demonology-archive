@@ -1027,3 +1027,643 @@
     padding: 8px;
   }
 }
+
+/* V10 — interactive mythology atlas */
+.culture-atlas {
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+  background:
+    radial-gradient(circle at 25% 45%, rgba(126, 29, 24, 0.16), transparent 28%),
+    linear-gradient(rgba(5, 6, 7, 0.96), rgba(5, 6, 7, 0.99)),
+    url('../../../assets/editorial/archive-texture.webp') center / cover no-repeat;
+}
+
+.culture-atlas__sigil {
+  position: absolute;
+  top: 60px;
+  right: 4vw;
+  width: min(20vw, 270px);
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+.culture-atlas__header > p {
+  max-width: 430px;
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.8;
+}
+
+.culture-atlas__layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(420px, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(34px, 6vw, 88px);
+  align-items: stretch;
+}
+
+.culture-atlas__map {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  border: 1px solid rgba(163, 111, 75, 0.22);
+  background:
+    radial-gradient(circle at center, rgba(139, 31, 25, 0.14), transparent 34%),
+    rgba(7, 8, 9, 0.82);
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.46);
+}
+
+.culture-atlas__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(181, 145, 108, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(181, 145, 108, 0.04) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: radial-gradient(circle, #000 0%, transparent 76%);
+}
+
+.culture-atlas__orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgba(177, 125, 84, 0.16);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.culture-atlas__orbit::before,
+.culture-atlas__orbit::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: rgba(177, 125, 84, 0.12);
+  content: '';
+  transform: translate(-50%, -50%);
+}
+
+.culture-atlas__orbit::before {
+  width: 100%;
+  height: 1px;
+}
+
+.culture-atlas__orbit::after {
+  width: 1px;
+  height: 100%;
+}
+
+.culture-atlas__orbit--one {
+  width: 68%;
+  aspect-ratio: 1;
+  animation: atlas-orbit 26s linear infinite;
+}
+
+.culture-atlas__orbit--two {
+  width: 43%;
+  aspect-ratio: 1;
+  animation: atlas-orbit-reverse 19s linear infinite;
+}
+
+.culture-atlas__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 125px;
+  aspect-ratio: 1;
+  place-content: center;
+  border: 1px solid rgba(197, 72, 56, 0.35);
+  border-radius: 50%;
+  background: rgba(8, 9, 10, 0.9);
+  box-shadow:
+    0 0 55px rgba(142, 32, 26, 0.2),
+    inset 0 0 35px rgba(142, 32, 26, 0.12);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.culture-atlas__center span {
+  color: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: 7px;
+  letter-spacing: 0.2em;
+}
+
+.culture-atlas__center strong {
+  margin-top: 6px;
+  color: var(--color-accent-light);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.atlas-node {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  min-width: 126px;
+  padding: 11px 13px;
+  gap: 4px;
+  border: 1px solid rgba(177, 125, 84, 0.2);
+  background: rgba(8, 9, 10, 0.82);
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 220ms ease,
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.atlas-node::before {
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  width: 18px;
+  height: 1px;
+  background: rgba(194, 75, 62, 0.34);
+  content: '';
+}
+
+.atlas-node span {
+  color: var(--color-accent-light);
+  font-family: var(--font-sans);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+}
+
+.atlas-node strong {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.atlas-node:hover,
+.atlas-node:focus-visible,
+.atlas-node--active {
+  border-color: rgba(199, 76, 63, 0.62);
+  background: rgba(126, 29, 24, 0.22);
+  box-shadow: 0 0 28px rgba(151, 36, 30, 0.18);
+  outline: none;
+  transform: translateY(-3px);
+}
+
+.atlas-node--slavic { top: 29%; left: 29%; }
+.atlas-node--japan { top: 37%; right: 5%; }
+.atlas-node--celtic { top: 17%; left: 5%; }
+.atlas-node--north { top: 4%; left: 42%; }
+.atlas-node--arabic { right: 18%; bottom: 20%; }
+.atlas-node--latin { left: 9%; bottom: 12%; }
+
+.culture-atlas__dossier {
+  min-width: 0;
+}
+
+.atlas-dossier {
+  display: grid;
+  min-height: 620px;
+  grid-template-rows: minmax(280px, 0.9fr) auto;
+  border: 1px solid rgba(163, 111, 75, 0.22);
+  background: rgba(8, 9, 10, 0.85);
+  animation: atlas-dossier-in 340ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.atlas-dossier__image {
+  position: relative;
+  overflow: hidden;
+}
+
+.atlas-dossier__image::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(7, 8, 9, 0.86), transparent 52%);
+  content: '';
+}
+
+.atlas-dossier__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.75) contrast(1.1) brightness(0.77);
+  animation: atlas-image-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.atlas-dossier__image > span {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 16px;
+  color: rgba(232, 224, 207, 0.72);
+  font-family: var(--font-sans);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.atlas-dossier__content {
+  padding: clamp(24px, 4vw, 42px);
+}
+
+.atlas-dossier__content > span {
+  color: var(--color-accent-light);
+  font-family: var(--font-sans);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.atlas-dossier__content h3 {
+  margin: 12px 0 16px;
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.atlas-dossier__content > p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.75;
+}
+
+.atlas-dossier__creatures {
+  display: grid;
+  margin-top: 30px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.atlas-dossier__creatures a {
+  position: relative;
+  display: grid;
+  min-height: 155px;
+  padding: 12px;
+  align-content: end;
+  overflow: hidden;
+  border: 1px solid rgba(163, 111, 75, 0.16);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.atlas-dossier__creatures a::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5, 6, 7, 0.96), rgba(5, 6, 7, 0.12));
+  content: '';
+}
+
+.atlas-dossier__creatures img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.72) brightness(0.62);
+  transition: transform 420ms ease, filter 280ms ease;
+}
+
+.atlas-dossier__creatures strong,
+.atlas-dossier__creatures span {
+  position: relative;
+  z-index: 1;
+}
+
+.atlas-dossier__creatures strong {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.atlas-dossier__creatures span {
+  color: var(--color-accent-light);
+  font-size: 12px;
+}
+
+.atlas-dossier__creatures a:hover img {
+  filter: saturate(1) brightness(0.74);
+  transform: scale(1.045);
+}
+
+.atlas-dossier__all {
+  display: inline-flex;
+  padding-bottom: 9px;
+  margin-top: 28px;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 1px solid var(--color-border-strong);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+@keyframes atlas-orbit {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes atlas-orbit-reverse {
+  to { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+@keyframes atlas-dossier-in {
+  from { opacity: 0; transform: translateX(18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes atlas-image-in {
+  from { transform: scale(1.04); filter: saturate(0.4) brightness(0.5); }
+  to { transform: scale(1); filter: saturate(0.75) contrast(1.1) brightness(0.77); }
+}
+
+@media (max-width: 1050px) {
+  .culture-atlas__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .culture-atlas__map {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 700px) {
+  .culture-atlas__header {
+    align-items: flex-start;
+  }
+
+  .culture-atlas__map {
+    display: flex;
+    min-height: auto;
+    padding: 16px;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .culture-atlas__grid,
+  .culture-atlas__orbit,
+  .culture-atlas__center {
+    display: none;
+  }
+
+  .atlas-node {
+    position: relative;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    min-width: 190px;
+    scroll-snap-align: start;
+  }
+
+  .atlas-node::before {
+    display: none;
+  }
+
+  .atlas-dossier {
+    min-height: auto;
+  }
+
+  .atlas-dossier__creatures {
+    grid-template-columns: 1fr;
+  }
+
+  .atlas-dossier__creatures a {
+    min-height: 120px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .culture-atlas__orbit,
+  .atlas-dossier,
+  .atlas-dossier__image img {
+    animation: none;
+  }
+}
+
+/* V12 — stable atlas geometry and cross-fade */
+.culture-atlas__layout {
+  align-items: stretch;
+}
+
+.culture-atlas__map,
+.culture-atlas__dossier {
+  height: 760px;
+  min-height: 760px;
+}
+
+.culture-atlas__dossier {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(163, 111, 75, 0.22);
+  background: rgba(8, 9, 10, 0.85);
+}
+
+.atlas-dossier {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  grid-template-rows: 430px minmax(0, 1fr);
+  border: 0;
+  background: transparent;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.995);
+  transition:
+    opacity 240ms ease,
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 360ms;
+  animation: none;
+}
+
+.atlas-dossier--active {
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  transition-delay: 0s;
+}
+
+.atlas-dossier__image {
+  min-height: 0;
+}
+
+.atlas-dossier__image img {
+  display: block;
+  animation: none;
+  transition:
+    filter 420ms ease,
+    transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.atlas-dossier--active .atlas-dossier__image img {
+  transform: scale(1.015);
+}
+
+.atlas-dossier__content {
+  display: flex;
+  min-height: 0;
+  padding: 24px 28px 26px;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.atlas-dossier__content h3 {
+  min-height: 1.8em;
+  margin: 8px 0 10px;
+  font-size: clamp(38px, 4vw, 58px);
+  line-height: 0.92;
+}
+
+.atlas-dossier__content > p {
+  display: -webkit-box;
+  min-height: 3.5em;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.75;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.atlas-dossier__creatures {
+  margin-top: 18px;
+}
+
+.atlas-dossier__creatures a {
+  min-height: 125px;
+}
+
+.atlas-dossier__all {
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+@media (max-width: 1050px) {
+  .culture-atlas__map {
+    height: 560px;
+    min-height: 560px;
+  }
+
+  .culture-atlas__dossier {
+    height: 760px;
+    min-height: 760px;
+  }
+}
+
+@media (max-width: 700px) {
+  .culture-atlas__map {
+    height: auto;
+    min-height: auto;
+  }
+
+  .culture-atlas__dossier {
+    height: 880px;
+    min-height: 880px;
+  }
+
+  .atlas-dossier {
+    grid-template-rows: 390px minmax(0, 1fr);
+  }
+
+  .atlas-dossier__content {
+    padding: 22px 20px 24px;
+  }
+
+  .atlas-dossier__content h3 {
+    min-height: auto;
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .atlas-dossier__creatures {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .atlas-dossier__creatures a {
+    min-height: 112px;
+  }
+}
+
+@media (max-width: 480px) {
+  .culture-atlas__dossier {
+    height: 940px;
+    min-height: 940px;
+  }
+
+  .atlas-dossier {
+    grid-template-rows: 350px minmax(0, 1fr);
+  }
+
+  .atlas-dossier__creatures {
+    grid-template-columns: 1fr;
+  }
+
+  .atlas-dossier__creatures a {
+    min-height: 92px;
+  }
+}
+
+/* V13 — keep faces visible in the three regional creature cards */
+.atlas-dossier__creatures .atlas-creature-card {
+  min-height: 132px;
+  background: #08090a;
+}
+
+.atlas-dossier__creatures .atlas-creature-card img {
+  object-fit: cover;
+  object-position: center 18%;
+  transform-origin: center 18%;
+}
+
+.atlas-dossier__creatures .atlas-creature-card:hover img {
+  transform: scale(1.035);
+}
+
+/* Fine-tuned focal points for portraits with faces at different heights. */
+.atlas-creature-card--baba-yaga img,
+.atlas-creature-card--leshy img,
+.atlas-creature-card--yuki-onna img,
+.atlas-creature-card--oni img,
+.atlas-creature-card--tengu img,
+.atlas-creature-card--banshee img,
+.atlas-creature-card--puca img,
+.atlas-creature-card--mara img,
+.atlas-creature-card--la-llorona img {
+  object-position: center 16%;
+  transform-origin: center 16%;
+}
+
+.atlas-creature-card--upyr img,
+.atlas-creature-card--dullahan img,
+.atlas-creature-card--draugr img,
+.atlas-creature-card--nokk img,
+.atlas-creature-card--ghoul img {
+  object-position: center 20%;
+  transform-origin: center 20%;
+}
+
+.atlas-creature-card--djinn img,
+.atlas-creature-card--ifrit img,
+.atlas-creature-card--el-silbon img,
+.atlas-creature-card--pishtaco img {
+  object-position: center 12%;
+  transform-origin: center 12%;
+}
+
+@media (max-width: 700px) {
+  .atlas-dossier__creatures .atlas-creature-card {
+    min-height: 150px;
+  }
+}

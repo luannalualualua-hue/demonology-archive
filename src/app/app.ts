@@ -53,7 +53,9 @@ export class App implements AfterViewInit {
       )
       .subscribe((event) => {
         if (event instanceof NavigationStart) {
-          this.routeChanging.set(true);
+          if (!('startViewTransition' in this.document)) {
+            this.routeChanging.set(true);
+          }
           return;
         }
 
@@ -182,6 +184,10 @@ export class App implements AfterViewInit {
       '.about-visual-strip',
       '.blog-visual-banner',
       '.article-visual-dossier',
+      '.culture-atlas',
+      '.atlas-node',
+      '.atlas-dossier__creatures a',
+      '.lightbox__filmstrip button',
     ].join(',');
 
     const elements = Array.from(

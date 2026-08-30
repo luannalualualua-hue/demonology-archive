@@ -27,10 +27,25 @@ export class CreatureDetails {
   private readonly titleService = inject(Title);
   private readonly creaturesService = inject(CreaturesService);
   private readonly destroyRef = inject(DestroyRef);
+  private sectionObserver?: IntersectionObserver;
+  private readonly sectionIds = [
+    'introduction',
+    'appearance',
+    'behavior',
+    'origin',
+    'symbolism',
+    'creative-use',
+  ];
 
   readonly creatures = this.creaturesService.getAll();
   readonly creature = signal<Creature | undefined>(undefined);
   readonly loading = signal(true);
+  readonly activeSection = signal('introduction');
+
+  readonly readingProgress = computed(() => {
+    const index = this.sectionIds.indexOf(this.activeSection());
+    return index <= 0 ? 0 : index / (this.sectionIds.length - 1);
+  });
 
   readonly currentIndex = computed(() => {
     const currentCreature = this.creature();
@@ -111,6 +126,8 @@ export class CreatureDetails {
   });
 
   constructor() {
+    this.destroyRef.onDestroy(() => this.sectionObserver?.disconnect());
+
     this.route.paramMap
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((params) => {
@@ -134,7 +151,47 @@ export class CreatureDetails {
           top: 0,
           behavior: 'instant',
         });
+
+        window.setTimeout(() => this.initializeSectionObserver(), 60);
       });
+  }
+
+  scrollToSection(sectionId: string, event: Event): void {
+    event.preventDefault();
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
+  private initializeSectionObserver(): void {
+    this.sectionObserver?.disconnect();
+
+    if (!('IntersectionObserver' in window)) {
+      return;
+    }
+
+    const sections = this.sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    this.sectionObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target.id) {
+          this.activeSection.set(visible.target.id);
+        }
+      },
+      {
+        rootMargin: '-24% 0px -58% 0px',
+        threshold: [0.05, 0.2, 0.45],
+      },
+    );
+
+    sections.forEach((section) => this.sectionObserver?.observe(section));
   }
 
   private getHabitatVisual(item: Creature): CreatureGalleryImage {

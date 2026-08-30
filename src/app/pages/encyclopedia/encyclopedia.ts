@@ -1,6 +1,7 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { CreaturesService } from '../../core/services/creatures.service';
 import { CreatureCard } from '../../shared/components/creature-card/creature-card';
@@ -14,6 +15,8 @@ import { CreatureCard } from '../../shared/components/creature-card/creature-car
 })
 export class Encyclopedia {
   private readonly creaturesService = inject(CreaturesService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly creatures = this.creaturesService.getAll();
 
@@ -84,6 +87,25 @@ export class Encyclopedia {
       this.selectedFear(),
     ].filter(Boolean).length;
   });
+
+
+  constructor() {
+    this.route.queryParamMap
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((params) => {
+        const culture = params.get('culture') ?? '';
+
+        if (culture && this.cultures.includes(culture)) {
+          this.selectedCulture.set(culture);
+          window.requestAnimationFrame(() => {
+            document.getElementById('catalog-top')?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+          });
+        }
+      });
+  }
 
   updateSearch(value: string): void {
     this.searchQuery.set(value);

@@ -1067,3 +1067,228 @@
     height: 92px;
   }
 }
+
+
+/* V9 typography fix for Playfair metrics */
+.blog-hero {
+  min-height: 620px;
+}
+
+.blog-hero__content {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.64fr);
+  gap: clamp(28px, 4vw, 70px);
+  align-items: end;
+}
+
+.blog-hero__heading h1,
+.blog-hero__content h1 {
+  max-width: 10.4ch;
+  margin: 10px 0 0;
+  font-size: clamp(60px, 8.5vw, 140px) !important;
+  letter-spacing: -0.055em;
+  line-height: 0.84 !important;
+  text-wrap: balance;
+}
+
+.blog-hero__right {
+  align-self: end;
+}
+
+.blog-hero__right > p {
+  max-width: 360px;
+}
+
+.blog-hero__visual {
+  width: min(100%, 490px);
+}
+
+@media (max-width: 900px) {
+  .blog-hero__heading h1,
+  .blog-hero__content h1 {
+    max-width: none;
+  }
+
+  .blog-hero__right > p {
+    max-width: 520px;
+  }
+}
+
+/* ============================================================
+   V14 — mobile/tablet responsive audit
+   ============================================================ */
+.blog-hero__content > *,
+.research-showcase > *,
+.featured-article > *,
+.research-sidebar__item > *,
+.articles-grid,
+.article-card {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .blog-hero {
+    min-height: auto;
+    padding: 124px 0 58px;
+  }
+
+  .blog-hero__meta {
+    margin-bottom: 40px;
+  }
+
+  .blog-hero__content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .blog-hero__heading h1,
+  .blog-hero__content h1 {
+    max-width: 100%;
+    font-size: clamp(54px, 11vw, 92px) !important;
+    line-height: 0.88 !important;
+  }
+
+  .blog-hero__right {
+    width: 100%;
+  }
+
+  .blog-hero__right > p {
+    max-width: 620px;
+  }
+
+  .blog-hero__visual {
+    width: 100%;
+    max-width: 620px;
+    justify-self: start;
+  }
+
+  .category-navigation {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+  }
+
+  .category-navigation button {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .research-showcase {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .research-showcase .featured-article__image img {
+    max-height: 520px;
+  }
+
+  .articles-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+}
+
+@media (max-width: 680px) {
+  .blog-hero {
+    padding-top: 108px;
+  }
+
+  .blog-hero__meta {
+    margin-bottom: 30px;
+  }
+
+  .blog-hero__heading h1,
+  .blog-hero__content h1 {
+    font-size: clamp(46px, 13vw, 68px) !important;
+    letter-spacing: -0.045em;
+  }
+
+  .blog-visual-banner {
+    padding: 18px 0 26px;
+  }
+
+  .blog-visual-banner figure {
+    padding: 8px;
+  }
+
+  .blog-visual-banner figcaption {
+    position: static;
+    padding: 16px 4px 4px;
+    gap: 10px;
+  }
+
+  .blog-visual-banner figcaption strong {
+    max-width: none;
+    font-size: clamp(26px, 8vw, 38px);
+    text-align: left;
+  }
+
+  .research-showcase {
+    margin-top: 34px;
+  }
+
+  .research-showcase .featured-article__content {
+    padding: 20px 16px;
+  }
+
+  .research-showcase .featured-article__content h2 {
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .research-sidebar__item {
+    min-height: 0;
+    padding: 14px 38px 14px 14px;
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .research-sidebar__item img {
+    width: 104px;
+    height: 92px;
+  }
+
+  .research-sidebar__item h3 {
+    font-size: clamp(22px, 7vw, 30px);
+  }
+
+  .research-sidebar__item p {
+    -webkit-line-clamp: 2;
+  }
+
+  .articles-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    margin-top: 52px;
+  }
+
+  .article-card__image img {
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 420px) {
+  .blog-hero__heading h1,
+  .blog-hero__content h1 {
+    font-size: 44px !important;
+  }
+
+  .research-sidebar__item {
+    padding: 0 0 16px;
+    grid-template-columns: 1fr;
+  }
+
+  .research-sidebar__item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .research-sidebar__item > div {
+    padding: 0 14px;
+  }
+
+  .research-sidebar__item i {
+    right: 14px;
+    bottom: 14px;
+  }
+}

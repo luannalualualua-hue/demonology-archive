@@ -850,3 +850,228 @@
     min-height: 0;
   }
 }
+
+
+/* V9 safe title metrics */
+.article-hero__content h1 {
+  line-height: 0.86 !important;
+  letter-spacing: -0.05em;
+}
+
+/* V10 — research reading timeline */
+.article-sidebar__sticky {
+  position: relative;
+  padding-left: 22px;
+}
+
+.article-sidebar__progress {
+  position: absolute;
+  top: 54px;
+  bottom: 10px;
+  left: 0;
+  width: 1px;
+  background: rgba(163, 111, 75, 0.18);
+}
+
+.article-sidebar__progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #8f201c, #d25b4d, #c49a71);
+  box-shadow: 0 0 12px rgba(195, 72, 56, 0.44);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 260ms ease;
+}
+
+.article-sidebar nav a {
+  position: relative;
+}
+
+.article-sidebar nav a::before {
+  position: absolute;
+  top: 50%;
+  left: -27px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid rgba(163, 111, 75, 0.34);
+  border-radius: 50%;
+  background: #070809;
+  content: '';
+  transform: translateY(-50%) scale(0.62);
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 220ms ease;
+}
+
+.article-sidebar nav a.is-active {
+  padding-left: 8px;
+  color: var(--color-text);
+}
+
+.article-sidebar nav a.is-active::before {
+  border-color: var(--color-accent-light);
+  background: #b44338;
+  box-shadow: 0 0 18px rgba(195, 72, 56, 0.55);
+  transform: translateY(-50%) scale(1);
+}
+
+.research-section {
+  scroll-margin-top: 118px;
+}
+
+/* ============================================================
+   V14 — research article mobile/tablet audit
+   ============================================================ */
+.article-hero__content,
+.article-body__layout,
+.article-content,
+.research-section__content,
+.article-visual-dossier,
+.related-creatures__grid,
+.article-navigation a {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .article-hero {
+    min-height: auto;
+    padding-top: 96px;
+  }
+
+  .article-hero__background {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: min(calc(100% - 36px), 720px);
+    height: auto;
+    min-height: 0;
+    margin: 22px auto 0;
+    opacity: 1;
+  }
+
+  .article-hero__background img {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .article-hero__inner {
+    min-height: 0;
+  }
+
+  .article-hero__content {
+    max-width: 100%;
+    padding: 48px 0 44px;
+  }
+
+  .article-hero__content h1 {
+    font-size: clamp(50px, 10vw, 84px) !important;
+    line-height: 0.9 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .article-hero__footer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .article-body {
+    padding-top: 70px;
+  }
+
+  .article-visual-dossier {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .article-visual-dossier__main {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 680px) {
+  .article-hero {
+    padding-top: 82px;
+  }
+
+  .article-hero__background {
+    width: calc(100% - 28px);
+    padding: 8px;
+  }
+
+  .article-hero__background img {
+    max-height: 380px;
+  }
+
+  .article-hero__top {
+    gap: 18px;
+  }
+
+  .article-hero__content {
+    padding: 34px 0;
+  }
+
+  .article-hero__content h1 {
+    font-size: clamp(42px, 12vw, 64px) !important;
+    letter-spacing: -0.04em;
+  }
+
+  .article-hero__subtitle {
+    font-size: 20px;
+  }
+
+  .article-hero__footer {
+    grid-template-columns: 1fr;
+  }
+
+  .article-body {
+    padding-top: 54px;
+  }
+
+  .article-introduction {
+    font-size: clamp(30px, 8vw, 44px);
+    line-height: 1.14;
+  }
+
+  .article-visual-dossier {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .article-visual-dossier__main {
+    grid-column: auto;
+  }
+
+  .research-section {
+    padding: 54px 0;
+  }
+
+  .research-section__content h2 {
+    font-size: clamp(38px, 11vw, 58px);
+    overflow-wrap: anywhere;
+  }
+
+  .research-section__content p {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+
+  .research-section__content blockquote {
+    padding-left: 20px;
+    font-size: clamp(28px, 8vw, 42px);
+  }
+
+  .article-navigation a {
+    min-height: 190px;
+    padding: 28px 20px;
+  }
+
+  .article-navigation strong {
+    font-size: clamp(30px, 9vw, 46px);
+    overflow-wrap: anywhere;
+  }
+}

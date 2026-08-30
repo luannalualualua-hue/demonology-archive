@@ -2,7 +2,10 @@
   class="card"
   [routerLink]="['/encyclopedia', creature().slug]"
 >
-  <div class="card__image">
+  <div
+    class="card__image"
+    [style.view-transition-name]="'creature-image-' + creature().slug"
+  >
     <img
       [src]="creature().mainImage"
       [alt]="creature().name"
@@ -24,7 +27,7 @@
         {{ creature().culture }}
       </span>
 
-      <h2>{{ creature().name }}</h2>
+      <h2 [style.view-transition-name]="'creature-title-' + creature().slug">{{ creature().name }}</h2>
 
       @if (creature().originalName) {
         <span class="card__original">

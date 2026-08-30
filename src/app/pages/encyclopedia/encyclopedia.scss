@@ -599,3 +599,167 @@
     gap: 22px 16px;
   }
 }
+
+
+/* V9 typography fix for Playfair metrics */
+.page-hero {
+  min-height: 590px;
+}
+
+.page-hero__content {
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 320px);
+  gap: clamp(28px, 4vw, 56px);
+}
+
+.page-hero__content h1 {
+  max-width: 9.6ch;
+  margin: 10px 0 0;
+  font-size: clamp(62px, 8.2vw, 146px) !important;
+  letter-spacing: -0.055em;
+  line-height: 0.84 !important;
+  text-wrap: balance;
+}
+
+.page-hero__description {
+  max-width: 320px;
+  align-self: end;
+}
+
+@media (max-width: 980px) {
+  .page-hero__content {
+    grid-template-columns: 1fr;
+  }
+
+  .page-hero__description {
+    max-width: 560px;
+  }
+}
+
+/* ============================================================
+   V14 — mobile/tablet responsive audit
+   ============================================================ */
+.page-hero__content > *,
+.catalog__toolbar > *,
+.catalog__layout > *,
+.catalog__results,
+.creatures-grid,
+.encyclopedia-sections a {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .page-hero {
+    min-height: auto;
+    padding: 124px 0 58px;
+  }
+
+  .page-hero__meta {
+    margin-bottom: 44px;
+  }
+
+  .page-hero__content {
+    gap: 26px;
+  }
+
+  .page-hero__content h1 {
+    max-width: 100%;
+    font-size: clamp(54px, 11vw, 92px) !important;
+    line-height: 0.88 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .page-hero__description {
+    max-width: 620px;
+    font-size: 14px;
+  }
+
+  .catalog {
+    padding-top: 34px;
+  }
+
+  .catalog__toolbar {
+    gap: 14px;
+  }
+
+  .filters {
+    width: min(92vw, 410px);
+    padding:
+      max(22px, env(safe-area-inset-top))
+      max(22px, env(safe-area-inset-right))
+      max(28px, env(safe-area-inset-bottom))
+      22px;
+  }
+
+  .creatures-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .page-hero {
+    padding-top: 108px;
+  }
+
+  .page-hero__meta {
+    margin-bottom: 34px;
+  }
+
+  .page-hero__content h1 {
+    font-size: clamp(44px, 13.5vw, 68px) !important;
+    letter-spacing: -0.045em;
+  }
+
+  .catalog__toolbar {
+    grid-template-columns: 1fr;
+    padding-bottom: 24px;
+  }
+
+  .search-field__control,
+  .mobile-filter-button {
+    width: 100%;
+  }
+
+  .search-field__control input {
+    min-width: 0;
+  }
+
+  .creatures-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .encyclopedia-sections {
+    grid-template-columns: 1fr;
+    margin-top: 48px;
+  }
+
+  .encyclopedia-sections a {
+    min-height: 94px;
+    padding: 16px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(163, 111, 75, 0.23);
+  }
+
+  .encyclopedia-sections a:last-child {
+    border-bottom: 0;
+  }
+
+  .encyclopedia-sections span {
+    font-size: 28px;
+  }
+
+  .encyclopedia-sections strong {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 390px) {
+  .page-hero__content h1 {
+    font-size: clamp(40px, 12.5vw, 52px) !important;
+  }
+
+  .filters {
+    width: 100vw;
+    border-left: 0;
+  }
+}

@@ -5,7 +5,10 @@
 } @else if (creature(); as item) {
   <article class="creature-page">
     <section class="creature-hero">
-      <div class="creature-hero__image">
+      <div
+        class="creature-hero__image"
+        [style.view-transition-name]="'creature-image-' + item.slug"
+      >
         <img
           [src]="item.mainImage"
           [alt]="item.name"
@@ -44,7 +47,7 @@
               {{ item.culture }}
             </p>
 
-            <h1>{{ item.name }}</h1>
+            <h1 [style.view-transition-name]="'creature-title-' + item.slug">{{ item.name }}</h1>
 
             @if (item.originalName) {
               <p class="creature-hero__original">
@@ -108,13 +111,17 @@
               СОДЕРЖАНИЕ МАТЕРИАЛА
             </span>
 
+            <div class="archive-sidebar__progress" aria-hidden="true">
+              <span [style.transform]="'scaleY(' + readingProgress() + ')' "></span>
+            </div>
+
             <nav aria-label="Содержание статьи">
-              <a href="#introduction">Образ</a>
-              <a href="#appearance">Внешний вид</a>
-              <a href="#behavior">Поведение</a>
-              <a href="#origin">Происхождение</a>
-              <a href="#symbolism">Символика</a>
-              <a href="#creative-use">Для творческих проектов</a>
+              <a href="#introduction" [class.is-active]="activeSection() === 'introduction'" (click)="scrollToSection('introduction', $event)">Образ</a>
+              <a href="#appearance" [class.is-active]="activeSection() === 'appearance'" (click)="scrollToSection('appearance', $event)">Внешний вид</a>
+              <a href="#behavior" [class.is-active]="activeSection() === 'behavior'" (click)="scrollToSection('behavior', $event)">Поведение</a>
+              <a href="#origin" [class.is-active]="activeSection() === 'origin'" (click)="scrollToSection('origin', $event)">Происхождение</a>
+              <a href="#symbolism" [class.is-active]="activeSection() === 'symbolism'" (click)="scrollToSection('symbolism', $event)">Символика</a>
+              <a href="#creative-use" [class.is-active]="activeSection() === 'creative-use'" (click)="scrollToSection('creative-use', $event)">Для творческих проектов</a>
             </nav>
 
             <div class="archive-sidebar__index">

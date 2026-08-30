@@ -180,6 +180,93 @@
   </div>
 </section>
 
+<section class="culture-atlas section" aria-labelledby="culture-atlas-title">
+  <img class="culture-atlas__sigil" src="assets/decor/sigil.svg" alt="" aria-hidden="true" />
+  <div class="container">
+    <header class="section-header culture-atlas__header">
+      <div>
+        <span class="section-kicker">ГЕОГРАФИЯ СТРАХА</span>
+        <h2 id="culture-atlas-title">Атлас мифологий</h2>
+      </div>
+
+      <p>
+        Выберите регион, чтобы увидеть, какие формы принимает страх
+        в разных культурных традициях.
+      </p>
+    </header>
+
+    <div class="culture-atlas__layout">
+      <div class="culture-atlas__map" aria-label="Интерактивная карта регионов">
+        <div class="culture-atlas__grid" aria-hidden="true"></div>
+        <div class="culture-atlas__orbit culture-atlas__orbit--one" aria-hidden="true"></div>
+        <div class="culture-atlas__orbit culture-atlas__orbit--two" aria-hidden="true"></div>
+
+        @for (region of atlasRegions; track region.id) {
+          <button
+            type="button"
+            [class]="'atlas-node ' + region.positionClass + (isAtlasRegionActive(region.id) ? ' atlas-node--active' : '')"
+            (mouseenter)="setAtlasRegion(region.id)"
+            (focus)="setAtlasRegion(region.id)"
+            (click)="setAtlasRegion(region.id)"
+          >
+            <span>{{ region.number }}</span>
+            <strong>{{ region.label }}</strong>
+          </button>
+        }
+
+        <div class="culture-atlas__center" aria-hidden="true">
+          <span>МИР</span>
+          <strong>СТРАХА</strong>
+        </div>
+      </div>
+
+      <div class="culture-atlas__dossier">
+        @for (region of atlasRegions; track region.id) {
+          <article
+            class="atlas-dossier"
+            [class.atlas-dossier--active]="isAtlasRegionActive(region.id)"
+            [attr.aria-hidden]="!isAtlasRegionActive(region.id)"
+            [attr.inert]="isAtlasRegionActive(region.id) ? null : ''"
+          >
+            <div class="atlas-dossier__image">
+              <img [src]="region.image" [alt]="region.label" />
+              <span>{{ region.number }} / {{ region.label }}</span>
+            </div>
+
+            <div class="atlas-dossier__content">
+              <span>{{ region.culture }}</span>
+              <h3>{{ region.label }}</h3>
+              <p>{{ region.description }}</p>
+
+              <div class="atlas-dossier__creatures">
+                @for (creature of region.creatures; track creature.slug) {
+                  <a
+                    [class]="'atlas-creature-card atlas-creature-card--' + creature.slug"
+                    [routerLink]="['/encyclopedia', creature.slug]"
+                  >
+                    <img [src]="creature.image" [alt]="creature.name" loading="lazy" />
+                    <strong>{{ creature.name }}</strong>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                }
+              </div>
+
+              <a
+                class="atlas-dossier__all"
+                routerLink="/encyclopedia"
+                [queryParams]="{ culture: region.culture }"
+              >
+                Открыть материалы региона
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="featured section">
   <div class="container">
     <header class="section-header">
@@ -200,7 +287,10 @@
           class="creature-card"
           [routerLink]="['/encyclopedia', creature.slug]"
         >
-          <div class="creature-card__image">
+          <div
+            class="creature-card__image"
+            [style.view-transition-name]="'creature-image-' + creature.slug"
+          >
             <img
               [src]="creature.image"
               [alt]="creature.name"
@@ -218,7 +308,7 @@
                 {{ creature.culture }}
               </span>
 
-              <h3>{{ creature.name }}</h3>
+              <h3 [style.view-transition-name]="'creature-title-' + creature.slug">{{ creature.name }}</h3>
             </div>
 
             <span class="creature-card__arrow" aria-hidden="true">

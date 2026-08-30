@@ -168,3 +168,47 @@
     margin-top: 0;
   }
 }
+
+/* V8 route and utility micro-interactions */
+.site-content {
+  transform-origin: 50% 0;
+  transition:
+    opacity 240ms ease,
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 220ms ease;
+}
+
+.site-content--changing {
+  opacity: 0.36;
+  transform: translateY(5px) scale(0.997);
+  filter: saturate(0.82) brightness(0.88);
+}
+
+.back-to-top::after {
+  position: absolute;
+  inset: -5px;
+  border: 1px solid transparent;
+  border-top-color: rgba(210, 85, 69, 0.45);
+  border-right-color: rgba(183, 137, 95, 0.22);
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 220ms ease,
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.back-to-top:hover::after {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+.scroll-progress {
+  transition: transform 90ms linear;
+}
+
+/* V12 — keep viewport overlays truly fixed */
+.site-content,
+.site-content--changing {
+  transform: none !important;
+}

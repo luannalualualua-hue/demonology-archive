@@ -4,6 +4,7 @@ import {
   computed,
   input,
   output,
+  signal,
 } from '@angular/core';
 
 import { GalleryImage } from '../../../core/models/gallery-image.model';
@@ -20,6 +21,10 @@ export class GalleryLightbox {
 
   readonly closed = output<void>();
   readonly indexChanged = output<number>();
+
+  readonly zoomed = signal(false);
+  readonly detailsVisible = signal(true);
+  private pointerStartX = 0;
 
   readonly selectedImage = computed(() => {
     return this.images()[this.selectedIndex()];
@@ -45,7 +50,7 @@ export class GalleryLightbox {
         ? images.length - 1
         : this.selectedIndex() - 1;
 
-    this.indexChanged.emit(nextIndex);
+    this.selectIndex(nextIndex);
   }
 
   showNext(): void {
@@ -60,7 +65,34 @@ export class GalleryLightbox {
         ? 0
         : this.selectedIndex() + 1;
 
-    this.indexChanged.emit(nextIndex);
+    this.selectIndex(nextIndex);
+  }
+
+  selectIndex(index: number): void {
+    this.zoomed.set(false);
+    this.indexChanged.emit(index);
+  }
+
+  toggleZoom(): void {
+    this.zoomed.update((value) => !value);
+  }
+
+  toggleDetails(): void {
+    this.detailsVisible.update((value) => !value);
+  }
+
+  onPointerDown(event: PointerEvent): void {
+    this.pointerStartX = event.clientX;
+  }
+
+  onPointerUp(event: PointerEvent): void {
+    const distance = event.clientX - this.pointerStartX;
+
+    if (Math.abs(distance) < 60) {
+      return;
+    }
+
+    distance > 0 ? this.showPrevious() : this.showNext();
   }
 
   preventClose(event: MouseEvent): void {
@@ -80,5 +112,15 @@ export class GalleryLightbox {
   @HostListener('document:keydown.arrowright')
   onArrowRight(): void {
     this.showNext();
+  }
+
+  @HostListener('document:keydown.z')
+  onZoomShortcut(): void {
+    this.toggleZoom();
+  }
+
+  @HostListener('document:keydown.i')
+  onDetailsShortcut(): void {
+    this.toggleDetails();
   }
 }

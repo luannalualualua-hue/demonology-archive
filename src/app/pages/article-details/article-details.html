@@ -64,9 +64,17 @@
               СОДЕРЖАНИЕ
             </span>
 
+            <div class="article-sidebar__progress" aria-hidden="true">
+              <span [style.transform]="'scaleY(' + readingProgress() + ')' "></span>
+            </div>
+
             <nav>
               @for (section of item.sections; track section.id) {
-                <a [href]="'#' + section.id">
+                <a
+                  [href]="'#' + section.id"
+                  [class.is-active]="activeSection() === section.id"
+                  (click)="scrollToSection(section.id, $event)"
+                >
                   <span>{{ section.number }}</span>
                   {{ section.title }}
                 </a>

@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" [class.header--scrolled]="scrolled()">
   <div class="header__inner container">
     <a
       class="brand"
@@ -12,6 +12,17 @@
         Демонология
       </span>
     </a>
+
+    <button
+      class="random-archive-button"
+      type="button"
+      aria-label="Открыть случайный архивный материал"
+      [disabled]="randomizing()"
+      (click)="openRandomArchive()"
+    >
+      <span class="random-archive-button__icon" aria-hidden="true">✦</span>
+      <span class="random-archive-button__label">Случайная запись</span>
+    </button>
 
     <button
       class="menu-button"
@@ -82,6 +93,17 @@
         О проекте
       </a>
 
+      <button
+        class="navigation__random"
+        type="button"
+        [disabled]="randomizing()"
+        (click)="openRandomArchive()"
+      >
+        <span>✦</span>
+        <strong>Архив выберет материал</strong>
+        <small>Открыть случайную запись</small>
+      </button>
+
       <div class="navigation__mobile-footer">
         МИФОЛОГИЯ / ФОЛЬКЛОР / ВИЗУАЛЬНАЯ КУЛЬТУРА
       </div>
@@ -105,3 +127,19 @@
     />
   </div>
 </header>
+
+
+@if (randomizing()) {
+  <div class="archive-selection" role="status" aria-live="polite">
+    <div class="archive-selection__sigil" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <p>АРХИВ ВЫБИРАЕТ МАТЕРИАЛ</p>
+    <strong>№ {{ randomArchiveNumber() }}</strong>
+    <h2>{{ randomCreatureName() }}</h2>
+    <small>Доступ к записи подтверждён</small>
+  </div>
+}
