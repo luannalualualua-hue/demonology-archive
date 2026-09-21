@@ -1217,3 +1217,30 @@ blockquote {
 body.archive-selection-open {
   overflow: hidden;
 }
+
+/* ============================================================
+   V16 — reveal safety for structural containers on narrow screens
+   Structural sections must never be hidden by reveal animations.
+   ============================================================ */
+.catalog,
+.gallery-section,
+.glossary-section,
+.blog-section,
+.archive-content,
+.article-body {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 700px) {
+  .catalog.reveal-item,
+  .gallery-section.reveal-item,
+  .glossary-section.reveal-item,
+  .blog-section.reveal-item,
+  .archive-content.reveal-item,
+  .article-body.reveal-item,
+  section.reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

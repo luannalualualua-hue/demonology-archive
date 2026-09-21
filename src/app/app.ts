@@ -152,20 +152,18 @@ export class App implements AfterViewInit {
 
     this.revealObserver?.disconnect();
 
+    // Animate compact/atomic elements only. Large page sections (catalog, article body,
+    // gallery section, etc.) must never start at opacity: 0: on narrow screens those
+    // sections become very tall and may never satisfy an IntersectionObserver ratio.
+    // That was the cause of the empty encyclopedia below ~650px.
     const selector = [
-      '.section',
-      '.catalog',
-      '.gallery-section',
-      '.glossary-section',
-      '.blog-section',
-      '.archive-content',
-      '.article-body',
-      '.project-intro',
-      '.mission',
-      '.principles',
-      '.classification',
-      '.audience',
-      '.methodology',
+      '.section-header',
+      '.manifesto__content',
+      '.project-intro__content',
+      '.mission__content',
+      '.classification__content',
+      '.audience__content',
+      '.methodology__content',
       '.creature-card',
       '.card',
       '.gallery-item',
@@ -184,7 +182,6 @@ export class App implements AfterViewInit {
       '.about-visual-strip',
       '.blog-visual-banner',
       '.article-visual-dossier',
-      '.culture-atlas',
       '.atlas-node',
       '.atlas-dossier__creatures a',
       '.lightbox__filmstrip button',
@@ -228,8 +225,10 @@ export class App implements AfterViewInit {
         }
       },
       {
-        threshold: 0.08,
-        rootMargin: '0px 0px -7% 0px',
+        // A very low threshold is intentional: portrait phones have a much smaller
+        // visible area than desktop and should reveal cards as soon as they enter it.
+        threshold: 0.01,
+        rootMargin: '0px 0px -3% 0px',
       },
     );
 
