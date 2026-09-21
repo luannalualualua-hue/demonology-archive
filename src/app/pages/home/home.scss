@@ -1667,3 +1667,58 @@
     min-height: 150px;
   }
 }
+
+/* V15 — client illustration pack on the landing archive */
+.hero-archive-grid__item .hero-archive-grid__image,
+.hero-guide__image img,
+.hero-mini-card img,
+.hero-research-strip__item img {
+  filter: saturate(0.9) contrast(1.04) brightness(0.72);
+}
+
+.hero-archive-grid__item:hover .hero-archive-grid__image,
+.hero-guide:hover .hero-guide__image img,
+.hero-mini-card:hover img,
+.hero-research-strip__item:hover img {
+  filter: saturate(1) contrast(1.06) brightness(0.82);
+}
+
+.hero-archive-grid__item--myth .hero-archive-grid__image {
+  object-position: 50% 42%;
+}
+
+.hero-archive-grid__item--folklore .hero-archive-grid__image {
+  object-position: 50% 35%;
+}
+
+.hero-archive-grid__item--visual .hero-archive-grid__image {
+  object-position: 50% 38%;
+}
+
+.hero-archive-grid__item--modern .hero-archive-grid__image {
+  object-position: 50% 34%;
+}
+
+.hero-guide__image img {
+  object-position: 52% center;
+}
+
+.hero-mini-card--glossary img {
+  object-position: 50% 54%;
+}
+
+.hero-mini-card--research img {
+  object-position: 50% 42%;
+}
+
+.hero-research-strip__item--bestiary img {
+  object-position: 52% 45%;
+}
+
+.hero-research-strip__item--women img {
+  object-position: 50% 38%;
+}
+
+.hero-research-strip__item--nature img {
+  object-position: 50% 44%;
+}
